@@ -1,0 +1,17 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage[font=Large]{caption}
+\begin{document}
+\LARGE
+\noindent The figure number and page number can be referenced with\\
+``\texttt{Figure\~{}$\backslash$ref\{fig:aulogo\} \\on page
+$\backslash$pageref\{fig:aulogo\}}''\\ which produces
+``Figure~\ref{fig:aulogo} on page \pageref{fig:aulogo}''
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.75\textwidth]{aulogo.pdf}
+  \caption{\large The Auburn Logo}
+  \label{fig:aulogo}
+\end{figure}
+
+\end{document}

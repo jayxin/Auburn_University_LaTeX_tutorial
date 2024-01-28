@@ -1,0 +1,442 @@
+%% LyX 1.6.6.1 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{beamer}
+\renewcommand{\familydefault}{\rmdefault}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\usepackage{graphicx}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\providecommand{\LyX}{L\kern-.1667em\lower.25em\hbox{Y}\kern-.125emX\@}
+\DeclareRobustCommand*{\lyxarrow}{%
+\@ifstar
+{\leavevmode\,$\triangleleft$\,\allowbreak}
+{\leavevmode\,$\triangleright$\,\allowbreak}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+ % this default might be overridden by plain title style
+ \newcommand\makebeamertitle{\frame{\maketitle}}%
+ \AtBeginDocument{
+   \let\origtableofcontents=\tableofcontents
+   \def\tableofcontents{\@ifnextchar[{\origtableofcontents}{\gobbletableofcontents}}
+   \def\gobbletableofcontents#1{\origtableofcontents}
+ }
+ \makeatletter
+ \long\def\lyxframe#1{\@lyxframe#1\@lyxframestop}%
+ \def\@lyxframe{\@ifnextchar<{\@@lyxframe}{\@@lyxframe<*>}}%
+ \def\@@lyxframe<#1>{\@ifnextchar[{\@@@lyxframe<#1>}{\@@@lyxframe<#1>[]}}
+ \def\@@@lyxframe<#1>[{\@ifnextchar<{\@@@@@lyxframe<#1>[}{\@@@@lyxframe<#1>[<*>][}}
+ \def\@@@@@lyxframe<#1>[#2]{\@ifnextchar[{\@@@@lyxframe<#1>[#2]}{\@@@@lyxframe<#1>[#2][]}}
+ \long\def\@@@@lyxframe<#1>[#2][#3]#4\@lyxframestop#5\lyxframeend{%
+   \frame<#1>[#2][#3]{\frametitle{#4}#5}}
+ \makeatother
+ \def\lyxframeend{} % In case there is a superfluous frame end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usetheme{Madrid}
+\AtBeginSection[]
+{
+  \begin{frame}{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\makeatother
+
+\usepackage{babel}
+
+\begin{document}
+
+\title{\LyX{}: The WYSIWYM Document Processor}
+
+
+\author{Robert Thetford, Jr.}
+
+
+\date{July 9, 2010}
+
+\makebeamertitle
+
+\lyxframeend{}\lyxframe{Outline}
+
+\tableofcontents{}
+
+
+\lyxframeend{}
+
+
+\lyxframeend{}\section{What is \protect\LyX{}?}
+
+
+\lyxframeend{}\lyxframe{What Is \LyX{}?}
+
+\setbeamercovered{dynamic}
+
+\LyX{} is document processor that works as a front end to \LaTeX{}.
+It allows for instant previewing of the document from the input side
+of the process, creating a near WYSIWYG version of \LaTeX{}, coined
+by \LyX{} users as WYSIWYM.
+
+We'll overview three of the common document classes:
+
+
+\pause{}
+\begin{enumerate}
+\item Article
+\item Letter
+\item Beamer
+\end{enumerate}
+
+\lyxframeend{}
+
+
+\lyxframeend{}\section{Article}
+
+
+\lyxframeend{}\lyxframe{Article}
+
+\textsf{Article} is the default document class when \LyX{} is first
+opened. The structure of sections, titles, and lists within the document
+works the same as in \LaTeX{}, but are entered differently. This will
+be explained in the next slide. These {}``paragraph styles'' are
+refered to, in \LyX{}, as environments. \textsf{Article} allows for
+other typical scientific document environments such as tables, figures,
+math expressions, etc. 
+
+
+\lyxframeend{}
+
+
+\lyxframeend{}\subsection{Sections, Titles, and Lists}
+
+
+\lyxframeend{}\lyxframe{Article}
+
+
+\framesubtitle{Sections, Titles, and Lists}
+
+\setbeamercovered{dynamic}
+
+Sections are very straightforward.
+
+
+\pause{}
+\begin{itemize}
+\item Click the cursor to the desired line in the document
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item Click the \textsf{Environment} dropbox (the leftmost element on the
+buttonbar)
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item Select \textsf{Section}, \textsf{Subsection}, \textsf{Subsubsection},
+\textsf{Paragraph}, or \textsf{Subparagraph}
+\end{itemize}
+
+\pause{}
+
+This automatically makes the selected line into the desired environment.
+Using this same method, a selected line can be made into an unnumbered
+section (\textsf{Section{*}}), \textsf{Title}, \textsf{Author}, \textsf{Enumerate}
+list, \textsf{Itemize} list, etc. All these environments are selectable
+in the dropbox. 
+
+
+\lyxframeend{}
+
+
+\lyxframeend{}\lyxframe{Article}
+
+
+\framesubtitle{Sections, Titles, and Lists}
+
+\includegraphics[width=0.9\textwidth]{\string"LyX Sections\string".eps}
+
+
+\lyxframeend{}
+
+
+\lyxframeend{}\subsection{Tables}
+
+
+\lyxframeend{}\lyxframe{Article}
+
+
+\framesubtitle{Tables}
+
+\setbeamercovered{dynamic}
+
+Tables are very straightforward. 
+
+
+\pause{}
+\begin{itemize}
+\item Click the cursor to the desired line in the document
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item Create a new table with \textsf{Insert}\lyxarrow{}\textsf{Table}
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item Specify how many columns and rows 
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item Click each and edit each individual cell
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item Use the Table Toolbar (shows at bottom of screen when inserted table
+is left-clicked) to toggle borderlines and designate multicolumns
+(multirows not supported by \LyX{})
+\end{itemize}
+
+\pause{}
+
+
+\note[item]{Tables can also be created with the \textsf{Insert table} button}
+
+
+\lyxframeend{}
+
+
+\lyxframeend{}\lyxframe{Article}
+
+
+\framesubtitle{Tables}
+
+\includegraphics[width=0.9\textwidth]{\string"LyX Table\string".eps}
+
+
+\lyxframeend{}
+
+
+\lyxframeend{}\subsection{Figures}
+
+
+\lyxframeend{}\lyxframe{Article}
+
+
+\framesubtitle{Figures}
+
+\setbeamercovered{dynamic}
+
+Figures are very straightforward. In \LyX{}, they are refered to as
+graphics.
+
+
+\pause{}
+\begin{itemize}
+\item Click the cursor to the desired line in the document
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item Create a new graphic with \textsf{Insert}\lyxarrow{}\textsf{Graphics}
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item Specify an image to insert (all known image formats will work)
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item Optional: Specify a scale percentage, scale by width, or scale by
+height value
+\end{itemize}
+
+\pause{}
+
+
+\note[item]{Graphics can also be inserted using the \textsf{Insert graphics}
+button.}
+
+
+\lyxframeend{}
+
+
+\lyxframeend{}\lyxframe{Article}
+
+
+\framesubtitle{Figures}
+
+\includegraphics[width=0.9\textwidth]{\string"LyX Graphic\string".eps}
+
+
+\lyxframeend{}
+
+
+\lyxframeend{}\subsection{Math}
+
+
+\lyxframeend{}\lyxframe{Article}
+
+
+\framesubtitle{Math}
+
+\setbeamercovered{dynamic}
+
+Math is very straightforward.
+
+
+\pause{}
+\begin{enumerate}
+\item Inline Equations
+
+
+\pause{}
+\begin{itemize}
+\item Click the cursor to the desired line in the document
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item Create a new math formula with \textsf{Insert}\lyxarrow{}\textsf{Math}\lyxarrow{}\textsf{Inline
+Formula}
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item Enter \LaTeX{} math commands or \LyX{} shorthand commands
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item Hit \textsf{Esc} to end the equation
+\end{itemize}
+
+\pause{}
+
+Displayed Equations are quite similar:
+
+\item Displayed Equations
+\end{enumerate}
+
+\pause{}
+\begin{itemize}
+\item Create a new math formula with \textsf{Insert}\lyxarrow{}\textsf{Math}\lyxarrow{}\textsf{Display
+Formula}
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item Give the equation a number label with \textsf{Edit}\lyxarrow{}\textsf{Math}\lyxarrow{}\textsf{Number
+Whole Formula }(for a single line equation)
+\end{itemize}
+
+\lyxframeend{}
+
+
+\lyxframeend{}\lyxframe{Article}
+
+
+\framesubtitle{Math}
+
+\includegraphics[width=0.9\textwidth]{\string"LyX Math\string".eps}
+
+
+\lyxframeend{}
+
+
+\lyxframeend{}\section{Letter}
+
+
+\lyxframeend{}\lyxframe{Letter}
+
+\LyX{} allows for a simple but professional looking \textsf{Letter}
+document. \textsf{Letter} can be written from scratch just like \textsf{Article},
+except that there are different environments available. However, an
+advantage to using \LyX{} is that there are some templates available
+to make creating documents even easier. One template included with
+\LyX{} is a \textsf{Letter} template.
+
+
+\lyxframeend{}
+
+
+\lyxframeend{}\subsection{Template}
+
+
+\lyxframeend{}\lyxframe{Letter}
+
+
+\framesubtitle{Template}
+
+\includegraphics[width=0.9\textwidth]{\string"LyX letter template\string".eps}
+
+%
+\begin{figure}
+
+
+\caption{Letter Template\label{fig:Letter-Template}}
+
+
+
+\end{figure}
+
+
+
+\lyxframeend{}
+
+
+\lyxframeend{}\section{Beamer}
+
+
+\lyxframeend{}\lyxframe{Beamer}
+
+\textsf{Beamer} is the slide presentation document class. From a \LaTeX{}
+user standpoint, the input process in \LyX{} for a \textsf{Beamer}
+document is a little odd at first, but simple after repeated use.
+Like \textsf{Article} and \textsf{Letter}, all the document class
+specific environments can be found in the \textsf{Environment} dropbox.
+The following screenshot is for the second frame of this presentation.
+
+
+\lyxframeend{}
+
+
+\lyxframeend{}\subsection{Example}
+
+
+\lyxframeend{}\lyxframe{Beamer}
+
+
+\framesubtitle{Example}
+
+\includegraphics[width=0.9\textwidth]{\string"LyX Beamer\string".eps}
+
+
+\lyxframeend{}
+
+
+\lyxframeend{}\section{Conclusion}
+
+
+\lyxframeend{}\lyxframe{Conclusion}
+
+In conclusion, \LyX{} is simple and hard?
+\begin{itemize}
+\item Creating documents that work within the default parameters is \emph{very}
+simple.
+\item Creating documents that require much fine tuning or more complex elements
+is difficult.
+\end{itemize}
+Questions?
+
+
+\lyxframeend{}
+\end{document}

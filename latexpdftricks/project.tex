@@ -1,0 +1,371 @@
+\documentclass[article]{beamer}
+
+\usetheme{Warsaw}
+\setbeamertemplate{footline}[frame number]
+\usefonttheme[]{serif}
+
+%% Font packages
+\usepackage{lmodern}
+\newcommand{\tsans}{\tiny\sffamily}
+
+\usepackage{geometry}
+\geometry{verbose,letterpaper}
+\usepackage{movie15}
+
+%% Math packages
+\usepackage{amsmath}
+\usepackage{bm}
+%% Table packages
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{overpic}
+\usepackage[format=hang]{caption}
+\usepackage[format=hang,font=scriptsize]{subcaption}
+\usepackage{pdfpages}
+\usepackage{lscape}
+\usepackage{cooltooltips}
+\usepackage{verbatim}
+\newcommand{\ic}[2]{\texttt{$\backslash$includegraphics[#1]\{#2\}}}
+\usepackage{hyperref}
+\synctex=1
+
+\title{\textsc{PDF tricks in \LaTeX}}
+\author[Timmy Sanders]{\textsc{Timmy Sanders}}
+\institute{\textsc{Department of Mathematics and Statistics\\Auburn University}}
+\date{\textsc{\scriptsize{\today}}}
+
+\AtBeginSection[]
+{
+  \begin{frame}{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}[fragile]
+\frametitle{Outline}
+\tableofcontents
+\end{frame}
+
+\section{Introduction}
+\subsection{Overview}
+
+\begin{frame}[fragile]{Overview}
+
+\begin{block}{Overview}
+
+The Portable Document Format (PDF) has many end uses. Most users only consider PDF for static printable documents. However, Adobe has integrated many of the multimedia aspects of Flash.
+
+\end{block}
+
+\end{frame}
+
+\subsection{Helpful Links and Examples}
+
+\begin{frame}[fragile]{Helpful Links}
+
+\begin{block}{Links}
+
+\begin{itemize}
+
+\item{\url{http://www.uoregon.edu/~noeckel/index.html}}
+\item{\url{http://www.ctan.org/tex}}
+\item{\url{http://emacsworld.blogspot.com}}
+
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Examples}
+
+\begin{block}{Examples}
+
+\begin{itemize}
+
+\item{\url{http://www.tug.org/texshowcase/#dynamics}}
+\item{\url{http://www.adobe.com/products/acrobat/readermain.html}}
+
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+
+\subsection{Packages}
+
+\begin{frame}[fragile]{Packages}
+
+\begin{block}{Basics}
+
+The packages needed to utilize the dynamic features of Portable Document Format (PDF) include:
+
+\begin{itemize}
+
+\item hyperref
+\item geometry
+\item movie15
+\item animate
+\item cooltooltips
+
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+
+\section{Balloons}
+\subsection{Overview}
+
+\begin{frame}[fragile]{Overview}
+
+\begin{block}{Basics}
+
+The packages needed to include cooltooltip commands:
+
+\begin{itemize}
+\item cooltooltips
+\item hyperref
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+\begin{frame}[fragile]{Overview}
+
+\begin{block}{Overview}
+
+The package cooltooltips is a macro that allows the developer of PDFs to include different interactive features. There are two commands that initiate cooltooltips:
+\begin{itemize}
+\item \verb! \cooltooltip!
+\item \verb! \cooltooltiptoggle!
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+
+\subsection{Syntax}
+
+\begin{frame}[fragile]{Syntax}
+
+\begin{block}{Commands}
+
+\begin{itemize}
+\item \verb! \cooltooltip[<popup color>][<link color>]{<subject>}{<message>}{<url>}{<tooltip>}{<text>}!
+\item \verb! \cooltooltiptoggle{<text>}!
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Syntax}
+\centering
+\begin{tabular}{|l|r|}
+\hline
+\multicolumn{2}{|c|}{Syntax for cooltooltip}\\
+\hline
+popup color & color of box around text\\
+\hline
+link color & color of box around hyperlink\\
+\hline
+subject & subject in popup window\\
+\hline
+message & text in popup window\\
+\hline
+url & hyperlink\\
+\hline
+tooltip & text displayed while mouse over link\\
+\hline
+text & text in hyperlink\\
+\hline
+\multicolumn{2}{|c|}{Syntax for cooltooltiptoggle}\\
+\hline
+text & text in toggle button\\
+\hline
+\end{tabular}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Example}
+
+\begin{block}{Syntax}
+
+\begin{verbatim}
+
+\cooltooltip
+[0 0 1]
+\{Example}
+\{This is an example of a cool tooltip. Pretty cool, eh?}
+\{http://www.ctan.org/}{Visit CTAN on the Web}
+\{This text\strut} is an example.
+
+\end{verbatim}
+
+\end{block}
+
+\end{frame}
+
+
+\section{Video}
+\subsection{Overview}
+
+\begin{frame}[fragile]{Overview}
+
+\begin{block}{Basics}
+
+The packages needed to include a mp4 or Flash multimedia are:
+
+\begin{itemize}
+\item movie15
+\item hyperref
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+
+\subsection{Syntax}
+
+\begin{frame}[fragile]{Syntax}
+
+\begin{block}{Syntax}
+\LaTeX {} processes the syntax for multimedia within the figure environment.
+\begin{verbatim}
+
+\begin{figure}[h]
+\includemovie[poster,text={text here}]{cm}{cm}{name of file}
+\end{figure}
+
+\end{verbatim}
+
+\end{block}
+
+\end{frame}
+
+\section{Animation}
+\subsection{Overview}
+
+\begin{frame}[fragile]{Overview}
+
+\begin{block}{Basics}
+In a PDF, the movie15 package creates video via frames of image files. Similarly, a PDF can use vector graphics for the frames to create motion within a document. The packages needed are:
+\begin{itemize}
+\item animate
+\item graphicx
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\subsection{Syntax}
+
+\begin{frame}[fragile]{Syntax}
+
+\begin{block}{Environment}
+
+\begin{itemize}
+\item \verb! \begin{animateinline}[<options>]{<frame rate>} ... \end{animateinline}!
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Syntax}
+
+\begin{block}{Command}
+
+\begin{itemize}
+\item \verb! \animategraphics[<options>]{<frame rate>}{<file basename>}{<first>}{<last>}!
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Example}
+
+\begin{block}{Syntax}
+This animation is of the function $y=\exp(x)$.
+\begin{verbatim}
+\animategraphics[controls, loop,timeline=timeline.txt]{4}{exp_}{0}{8}!
+\end{verbatim}
+
+\end{block}
+
+\end{frame}
+
+
+\section{PDFComments}
+\subsection{Overview}
+
+\begin{frame}[fragile]{}
+
+\begin{block}{Overview}
+A PDF has several different styles of comments to add various information in a document.
+\end{block}
+
+\end{frame}
+
+\subsection{Syntax}
+
+\begin{frame}[fragile]{Syntax}
+
+\begin{block}{Environment}
+
+\begin{itemize}
+\item \verb! \begin{pdfsidelinecomment}[<options>]{<comments>} ... \end{pdfsidelinecomment}!
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Syntax}
+
+\begin{block}{Commands}
+
+\begin{itemize}
+\item \verb! \pdfcomment[<options>]{<comment>}!
+\item \verb! \pdfmargincomment[<options>]{<comment>}!
+\item \verb! \pdfmarkup[<options>]{<markup text>}{<comment>}!
+\item \verb! \pdfsquarecomment[<options>]{<comment>}!
+\item \verb! \pdfcirclecomment[<options>]{<comment>}!
+\item \verb! \pdflinecomment[<options>]{<comment>}!
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+
+\section{Conclusion}
+
+\begin{frame}[fragile]{}
+
+\begin{block}{Conclusion}
+
+Multimedia is imbedded into a PDF to transform a traditional static document into a dynamical document. The interaction of the document and the user, provides the developer the ability to include hyperlinks, popups, descriptions, etc. to enrich the document style.
+
+\end{block}
+
+\end{frame}
+
+\subsection{Questions}
+
+\begin{frame}[fragile]{}
+
+\centering
+{\Huge{\bfseries QUESTIONS?}}
+
+\end{frame}
+
+
+\end{document} 

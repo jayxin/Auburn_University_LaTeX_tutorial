@@ -1,0 +1,1213 @@
+\documentclass[article]{beamer}
+
+%% Beamer packages 
+\usetheme{OxygenAU} 
+\useoutertheme{progressbar} % replaces footer with a progress bar (comment or remove this line to have a traditional footer)
+\setbeamertemplate{background}{\includegraphics[width=\paperwidth,height=\paperheight]{background.png}} % uses the image background.* as the background for the presentation (This line can be deleted or commented to have a white background)
+%\usepackage{handoutWithNotes} % create a handout with a place for notes
+%\pgfpagesuselayout{3 on 1 with notes}[a4paper,border shrink=5mm]
+
+\setbeamertemplate{caption}[numbered]
+
+
+%% Font packages
+\usepackage{lmodern} % Use the latin modern font (an updated version of the Computer Modern font)
+\usepackage{inkscapelatex} % defines the command \includesvg to interact with the latex capabilities of inkscape
+\newcommand{\tsans}{\tiny\sffamily} % short cut for tiny sans serif font
+
+%% Math packages
+\usepackage{amsmath} % additional math environments and symbols
+\usepackage{bm} % gives bold versions of some symbols that don't have bold versions by default
+
+%% Table packages
+\usepackage{multirow} % enable multirow support in tables
+\usepackage{booktabs} % changes the default spacing of a table (use \toprule, \midrule, \cmidrule, and \bottomrule instead of \hline)
+
+%% Figure/Graphics packages
+\usepackage{graphicx} % enable graphics support (eps, pdf, png, jpg)
+\usepackage{overpic} % place text, tables, or other images on top of an image
+\usepackage[format=hang]{caption} % customize the way captions are displayed
+\usepackage[format=hang,font=scriptsize]{subcaption}
+%\usepackage{subfig} % enable subfigures (\subfloat[])
+%\usepackage{subfigure}
+\usepackage{pdfpages} % include pdf pages or entire pdf documents
+\usepackage{lscape}
+
+\usepackage{verbatim}
+\newcommand{\ic}[2]{\texttt{$\backslash$includegraphics[#1]\{#2\}}}
+
+\usepackage{hyperref}
+
+\synctex=1 % enable the ability to click on a line in a pdf and have the code in the tex document that created that line to be highlighted in a text editor (requires a compatible pdf viewer)
+
+
+
+\title{\textsc{Graphics in \LaTeX}}
+\author[Jack Maddox]{\textsc{Jack Maddox}}
+\institute{\textsc{Department of Mechanical Engineering\\Auburn University}}
+\date[7/14/2010]{\textsc{\scriptsize{July 14, 2010}}}
+
+% add a table of contents update at the beginning of each section
+%\AtBeginSection[]
+%{
+%\begin{frame}[shrink]
+%  \frametitle{Outline}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+%}
+\AtBeginSection[] % Do nothing for \section* 
+{ \begin{frame}
+\frametitle{Outline}
+{\footnotesize 
+\begin{columns}
+\begin{column}[t]{0.5\textwidth}
+\tableofcontents[currentsection,sections={1-3}]
+\end{column}
+\begin{column}[t]{0.5\textwidth}
+\tableofcontents[currentsection,sections={4-5}]
+\end{column}
+\end{columns}
+} 
+\end{frame} }
+
+\setbeamertemplate{caption}[numbered]
+\begin{document}
+
+\maketitle
+
+\begin{frame}[shrink]{Outline}{}
+%\tableofcontents%[pausesections]
+{\footnotesize 
+\begin{columns}
+\begin{column}[t]{0.5\textwidth}
+\tableofcontents[sections={1-3}]
+\end{column}
+\begin{column}[t]{0.5\textwidth}
+\tableofcontents[sections={4-5}]
+\end{column}
+\end{columns}
+}
+\end{frame}
+
+\section{Background}
+\subsection{Enable Graphics Support}
+\begin{frame}[fragile,shrink]
+  \frametitle{Enable Graphics Support}
+  \framesubtitle{}
+  \begin{itemize}%[]
+    \item \LaTeX does not have graphics capabilities by default.
+    \item Enable graphics with the ``graphics'' or ``graphicx'' package
+      \begin{itemize}%[]
+        \item \begin{verbatim}\usepackage[driver]{graphics}\end{verbatim}
+          \begin{itemize}%[]
+            \item Uses traditional \LaTeX syntax (arguments are positional)
+            \item Less convenient (i.e.\ don't use this one)
+          \end{itemize}
+        \item \begin{verbatim}\usepackage[driver]{graphicx}\end{verbatim} 
+          \begin{itemize}%[]
+            \item Uses a keyword syntax (i.e. width=5cm)
+            \item Has all the capabilities of the graphics package with a more convenient syntax (i.e. use this one)
+          \end{itemize}
+        \item The driver argument is optional and it is best to leave it blank unless you have a specific reason to use a non standard driver.     
+      \end{itemize}
+  \end{itemize}
+  \begin{alertblock}{Enable graphics with}
+    \begin{verbatim}
+    \usepackage{graphicx}
+    \end{verbatim}  
+  \end{alertblock}
+\end{frame}
+
+\subsection{\LaTeX{} vs.\ pdf\LaTeX{}}
+\begin{frame}
+  \frametitle{\LaTeX{} vs.\ pdf\LaTeX}
+  \framesubtitle{DVI vs.\ PDF}
+  
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{center}
+      \Large{\LaTeX}
+    \end{center}
+      \begin{itemize}%[]
+        \item Outputs DVI
+        \item Supports encapsulated postscript (EPS) only
+        \item Supports PSTricks
+      \end{itemize}
+      
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{center}
+        \Large{pdf\LaTeX}
+    \end{center}
+    \begin{itemize}%[]
+      \item Outputs PDF
+      \item Supports PDF, PNG, and JPG
+      \item Does not support EPS or PSTricks
+    \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Formats}
+\begin{frame}[shrink]
+  \frametitle{Which format to use}
+  \framesubtitle{pdf vs.\ png vs.\ jpg}
+  Which format should be used depends on the situation.
+    \begin{itemize}%[]
+      \item Portable Document Format (PDF)
+        \begin{itemize}%[]
+          \item Vector graphic
+          \item Scalable without pixelation
+          \item Smaller file size (if a true vector graphic)
+          \item Use for graphs and plots if your math software supports it
+          \item Bitmaps can be converted into pdf, but the file size will usually be very large
+        \end{itemize}
+      \item Portable Network Graphic (PNG)
+        \begin{itemize}%[]
+          \item Bitmap graphic
+          \item Lossless
+          \item Crisper edges
+          \item Larger file size (than jpg)
+          \item Use for screen shot, diagrams (if a vector version is no available), and any image with sharp edges (like a diagram with black lines)
+        \end{itemize}
+      \item Joint Photographics Expert Group (JPEG or JPG)
+        \begin{itemize}%[]
+          \item Bitmap graphic
+          \item Lossy
+          \item Gradual color changes
+          \item Smaller file sizes
+          \item Use for photographs
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+
+
+\section{Including Graphics}
+\subsection{The \texttt{includegraphics} Command}
+\begin{frame}[fragile,shrink]
+  \frametitle{\thesubsection}
+  \framesubtitle{}
+  Graphics can be included with the command
+  \begin{verbatim}
+    \includegraphics[key=value]{filename}
+  \end{verbatim} \vspace{-16pt}
+  where the options for \texttt{key} are
+  \begin{description}%[]
+    \item[width] resize  image to the width  given
+    \item[height] resize image to the height given
+    \item[totalheight] resize image to totalheight
+    \item[keepaspectratio] if both width and height are defined, then scale the image to fit the smaller of the two
+    \item[scale] scale image to a percentage of its original size
+    \item[angle] rotate the image counterclockwise (degrees)
+    \item[origin] the point about which the image should be rotated
+    \item[viewport] view only the region within the given coordinates
+    \item[trim] crop the image by the given dimensions 
+    \item[clip] turn on the effects of trim
+    \item[draft] display a figure even in draft mode
+  \end{description}
+\end{frame}
+
+\subsection{Specifying the Filename}
+\begin{frame}[fragile,shrink]
+  \begin{verbatim}
+    \includegraphics{filename}
+  \end{verbatim} \vspace{-16pt}
+  \frametitle{\thesection}
+  \framesubtitle{Specifying the Extension}
+  \begin{itemize}%[]
+    \item The \texttt{filename} can be given as \texttt{filename.ext} (i.e.\ \texttt{filename.pdf})
+    \item If an extension for \texttt{filename} is not given then \LaTeX{} or pdf\LaTeX{} will try to add the appropriate extension for you.
+          \begin{itemize}%[]
+            \item .eps for \LaTeX{}
+            \item .png, .pdf, .jpg, or .mps for pdf\LaTeX{}
+          \end{itemize}
+          The order and type of the extensions can be customized with the \texttt{\(\backslash\)DeclareGraphicsExtension} command.  The defaults are 
+          \begin{itemize}%[]
+              \footnotesize
+            \item \texttt{\(\backslash\)DeclareGraphicsExtension$\{$.eps,.ps,eps.gz,.ps.gz,eps.Z$\}$}
+            \item
+              \texttt{\(\backslash\)DeclareGraphicsExtension$\{$.png,.pdf,.jpg,.mps$\}$}
+          \end{itemize}
+          
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile,shrink]
+  \frametitle{\thesubsection}
+  \framesubtitle{Path}
+  Graphics that are not in the same directory as the \texttt{.tex} file can be included in one of three ways.
+  \begin{enumerate}
+    \item \texttt{$\backslash$includegraphics$\{$path/to/file$\}$}
+      \begin{itemize}%[]
+        \item Requires same relative path on all computers
+        \item Can lead to pool space problems
+      \end{itemize}
+    \item \texttt{$\backslash$graphicspath$\{$path/to/$\}$}\\
+          \texttt{$\backslash$includegraphics$\{$file$\}$}
+          \begin{itemize}%[]
+            \item Requires same relative path on all computers
+            \item Can lead to pool space problems
+          \end{itemize}
+    \item \texttt{setenv TEXINPUTS /dir1:/dir2:}
+      \begin{itemize}%[]
+        \item Needs to be run from a shell (sh, bash, etc.)
+        \item Recommended because it conserves pool space
+      \end{itemize}
+  \end{enumerate}
+\end{frame}
+
+\subsection{Size \& Rotation}
+\begin{frame}[fragile,shrink]
+  \frametitle{\thesubsection}
+  \framesubtitle{width, height, depth, totalheight}
+  \vspace{18pt}
+  \begin{center}
+  \includegraphics[height=0.75\textheight]{Sizes}
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile,shrink]
+  \frametitle{\thesubsection}
+  \framesubtitle{width, height, depth, totalheight}
+  \vspace{32pt}
+  \centering
+  \includegraphics[width=\textwidth]{Rotation}
+\end{frame}
+
+\begin{frame}[fragile,shrink]
+  \frametitle{\thesubsection}
+  \framesubtitle{Resizing Images}
+  \vspace{-12pt}
+  \begin{verbatim}
+  \includegraphics[]{aulogo.pdf}
+  \end{verbatim}
+  \vspace{-24pt}
+  \begin{figure}[]
+    \hfill
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includegraphics[width=2cm]{aulogo.pdf}
+      \caption{[width=2cm]}
+    \end{subfigure}%
+    \hfill
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includegraphics[height=2cm]{aulogo.pdf}
+      \caption{[height=2cm]}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includegraphics[totalheight=2cm]{aulogo.pdf}
+      \caption{[totalheight=2cm]}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includegraphics[scale=0.2]{aulogo.pdf}
+      \caption{[scale=0.15]}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includegraphics[width=1cm,height=2cm]{aulogo.pdf}
+      \caption{[width=1cm,\\height=2cm]}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includegraphics[width=1cm,height=2cm,keepaspectratio]{aulogo.pdf}
+      \caption{[width=1cm,\\height=2cm,\\keepaspectratio]}
+    \end{subfigure}
+    \caption{Size options for \texttt{$\backslash$includegraphics}}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[fragile,shrink]
+  \frametitle{\thesubsection}
+  \framesubtitle{Rotating Images}
+  \vspace{-12pt}
+  \begin{verbatim}
+  \includegraphics[]{aulogo.pdf}
+  \end{verbatim}
+  \vspace{-36pt}
+  \begin{figure}[]
+    \centering
+    \hfill
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includegraphics[height=2cm,angle=0]{aulogo.pdf}
+      \caption{[height=2cm,\\angle=0]}
+    \end{subfigure}%
+    \hfill
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includegraphics[height=2cm,angle=30]{aulogo.pdf}
+      \caption{[height=2cm,\\ angle=30]}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includegraphics[angle=30,height=2cm]{aulogo.pdf}
+      \caption{[angle=30,\\height=2cm]}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includegraphics[height=2cm,angle=-30]{aulogo.pdf}
+      \caption{[height=2cm,\\angle=-30]}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includegraphics[angle=-30,height=2cm]{aulogo.pdf}
+      \caption{[angle=-30,\\height=2cm]}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includegraphics[angle=-30,totalheight=2cm]{aulogo.pdf}
+      \caption{[angle=-30,\\totalheight=2cm]}
+    \end{subfigure}
+    \caption{Rotation options and order of operations for \texttt{\textbackslash includegraphics}}
+  \end{figure}
+  \vspace{-24pt}
+\end{frame}
+
+\begin{frame}[fragile,shrink]
+  \frametitle{\thesubsection}
+  \framesubtitle{Scalable Lengths}
+  Dimensions can be defined as scalable lengths
+  \begin{itemize}
+    \item \ic{width=1$\backslash$textwidth}{box.pdf}
+  \end{itemize}
+        \includegraphics[width=1\textwidth]{box.pdf}
+  \begin{itemize}%[]
+    \item \ic{width=1$\backslash$linewidth}{box.pdf}
+        \includegraphics[width=1\linewidth]{box.pdf}
+    \item \ic{width=$\backslash$textwidth-$\backslash$linewidth}{box.pdf}
+        \includegraphics[width=\textwidth-\linewidth]{box.pdf}
+  \end{itemize}
+
+  \begin{columns}
+    \fbox{\begin{column}{0.7\textwidth}
+      Column 1
+  \begin{itemize}%[]
+    \item \texttt{$\backslash$includegraphics}\\
+      \texttt{[width=1$\backslash$columnwidth]\{box.pdf\}}
+  \end{itemize}
+        \includegraphics[width=1\columnwidth]{box.pdf}
+      \end{column}}
+    \fbox{\begin{column}{0.2\textwidth}
+      Column 2 
+    \end{column}}\hfill
+  \end{columns}
+
+  \begin{itemize}%[]
+    \item \ic{height=0.025$\backslash$textheight}{box.pdf}
+        \includegraphics[height=0.025\textheight]{box.pdf}
+  \end{itemize}
+\end{frame}
+
+
+\subsection{Positioning}
+\begin{frame}[fragile,shrink]
+  \frametitle{\thesubsection}
+  \framesubtitle{Centering}
+  \begin{verbatim}
+  \begin{center}
+    \includegraphics[width=2cm]{aulogo.pdf}
+  \end{center}
+  \end{verbatim}
+  \begin{center}
+    \includegraphics[width=2cm]{aulogo.pdf}
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile,shrink]
+  \frametitle{\thesubsection}
+  \framesubtitle{Multiple Images}
+  \begin{verbatim}
+  \begin{center}
+    \fbox{\includegraphics[width=2cm]{aulogo.pdf}}
+    \fbox{\includegraphics[width=2cm]{aulogo.pdf}}
+  \end{center}
+  \end{verbatim}
+  \begin{center}
+    \fbox{\includegraphics[width=2cm]{aulogo.pdf}}
+    \fbox{\includegraphics[width=2cm]{aulogo.pdf}}
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile,shrink]
+  \frametitle{\thesubsection}
+  \framesubtitle{Avoiding Inter-Word Space Between Images}
+  \begin{verbatim}
+  \begin{center}
+    \fbox{\includegraphics[width=2cm]{aulogo.pdf}}%
+    \fbox{\includegraphics[width=2cm]{aulogo.pdf}}
+  \end{center}
+  \end{verbatim}
+  \begin{center}
+    \fbox{\includegraphics[width=2cm]{aulogo.pdf}}%
+    \fbox{\includegraphics[width=2cm]{aulogo.pdf}}
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile,shrink]
+  \frametitle{\thesubsection}
+  \framesubtitle{Spacing Multiple Images}
+  \begin{verbatim}
+  \begin{center}
+    \hfill
+    \fbox{\includegraphics[width=2cm]{aulogo.pdf}}
+    \hfill
+    \fbox{\includegraphics[width=2cm]{aulogo.pdf}}
+    \hspace*{\fill}
+  \end{center}
+  \end{verbatim}
+  \begin{center}
+    \hfill
+    \fbox{\includegraphics[width=2cm]{aulogo.pdf}}
+    \hfill
+    \fbox{\includegraphics[width=2cm]{aulogo.pdf}}
+    \hspace*{\fill}
+  \end{center}
+\end{frame}
+
+\section{Floats}
+\subsection{What is a Float?}
+\begin{frame}
+  \frametitle{\thesubsection}
+  \framesubtitle{Figures, Tables, Margin Notes, .etc}
+  \begin{itemize}%[]
+    \item In \LaTeX{}, floats are objects which automatically move to esthetically
+    pleasing locations, i.e.\ figures and tables.  
+    \item A float may not appear on the page where it was defined or first
+      referenced.
+    \item  Don't use the phrase ``In the following figure,'' instead use ``In Figure 14.'' 
+  \end{itemize}
+  
+\end{frame}
+
+
+\subsection{Float Placement}
+\begin{frame}
+  \frametitle{\thesubsection}
+  \framesubtitle{Float Placement}
+  \begin{itemize}%[]
+    \item When declaring a float, the following options can be used for
+      placement
+  \begin{description}
+    \item[h] place the float here
+    \item[t] place the float at the top of a page
+    \item[b] place the float at the bottom of a page
+    \item[p] place the float on a special ``floats only'' page
+    \item[!] try really hard to apply the option given, i.e.~[h!] will try to
+      place the float ``here'' even if it looks bad
+  \end{description}
+    \item In general, it is better if you give \LaTeX{} as many options as possible,
+        i.e.~[htbp]
+    \item The option [h] is a really bad idea and most distributions will
+      automatically replace it with [ht]
+  \end{itemize}
+
+\end{frame}
+
+
+\subsection{Overriding Float Settings}
+\begin{frame}
+  \frametitle{\thesubsection}
+  \framesubtitle{Clearing the Float Queue}
+  Floats must appear in the order in which they are defined, i.e. Figure 7
+  can't appear before Figure 6.  Therefore, if Figure 6 doesn't fit into the
+  body of the text well, then it can be pushed to the end of a chapter,
+  section, subsection, etc.; and it will take all of the following figures
+  with it.  Three ways to clear the float queue are:
+  \begin{itemize}%[]
+    \item \texttt{$\backslash$clearpage}
+    \item \texttt{$\backslash$afterpage\{$\backslash$clearpage\}} \(\Rightarrow\)
+      Requires the \texttt{afterpage} package
+    \item \texttt{$\backslash$FloatBarrier} \(\Rightarrow\) Requires the
+      \texttt{placeins} package.  
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\thesubsection}
+  \framesubtitle{Postponing Floats}
+  There are also ways to postpone the appearance of floats
+  \begin{itemize}%[]
+    \item \texttt{$\backslash$usepackage\{flafter\}} stops a float from
+      appearing before it is referenced in the text
+    \item \texttt{$\backslash$usepackage\{endfloats\}} moves all floats to
+      the end of the document (required by some journals)
+    \item \texttt{$\backslash$suppressfloats} prevents floats from
+      appearing on the current page
+    \item \texttt{$\backslash$suppressfloats[t]} prevents floats from
+      appearing at the top of the current page
+    \item \texttt{$\backslash$suppressfloats[b]} prevents floats from
+      appearing at the bottom of the current page
+    \item \texttt{$\backslash$usepackage\{morefloats\}} increases the size of
+      the float queue from 18 to 36
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{\thesubsection}
+  \framesubtitle{Adjusting the Float Settings}
+  The float settings (consider by some to be too restrictive) can be
+  customized with the following.
+   \begin{verbatim}
+   \setcounter{topnumber}{4} 
+   \setcounter{bottomnumber}{4} 
+   \setcounter{totalnumber}{10}
+   \renewcommand{\textfraction}{0.15}
+   \renewcommand{\topfraction}{0.85}
+   \renewcommand{\bottomfraction}{0.70}
+   \renewcommand{\floatpagefraction}{0.66}
+   \end{verbatim}
+\end{frame}
+
+
+
+
+\subsection{The \texttt{figure} Environment}
+\begin{frame}[fragile,shrink]
+  \frametitle{\thesubsection}
+  \framesubtitle{}
+  An image can be included as a figure with the following command.
+  \begin{verbatim}
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics[key=value]{filename}
+    \caption{Caption text}
+    \label{fig:DescriptiveName} 
+  \end{figure}
+  \end{verbatim}
+  \vspace{-12pt}
+  Note: it is better to used \texttt{$\backslash$centering} than
+  \texttt{$\backslash$begin\{center\}\ldots$\backslash$end\{center\}} in a
+  figure environment because both environments insert an empty line above and
+  below their contents
+  \begin{alertblock}{Warning}
+    The label must be after the caption, or it will reference the previous
+    item
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile,shrink]
+  \frametitle{\thesubsection}
+  \framesubtitle{Multiple Images in a Figure}
+  The same commands that were used earlier for including graphics can be used
+  within an figure environment
+  \begin{verbatim}
+  \begin{figure}[htbp]
+    \centering
+    \fbox{\includegraphics[width=2cm]{aulogo.pdf}}
+    \fbox{\includegraphics[width=2cm]{aulogo.pdf}}
+    \caption{Caption text}
+    \label{fig:DescriptiveName} 
+  \end{figure}
+  \end{verbatim}
+  \vspace{-12pt}
+  \begin{figure}[htbp]
+    \centering
+    \fbox{\includegraphics[width=2cm]{aulogo.pdf}}
+    \fbox{\includegraphics[width=2cm]{aulogo.pdf}}
+    \caption{Caption text}
+    \label{fig:DescriptiveName} 
+  \end{figure}
+\end{frame}
+
+\subsection{Referencing Figures}
+\begin{frame}
+  \frametitle{\thesubsection}
+  \framesubtitle{}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      Figures can be referenced in text with the command
+      \texttt{\textbackslash ref\{fig:name\}}, where \texttt{fig:name}
+      corresponds to the name given in the \texttt{\textbackslash label\{\}}
+      command when the figure was defined.
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \colorbox{white}{\includegraphics[height=0.9\textheight]{figure_reference_example.pdf}}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\thesubsection}
+  \framesubtitle{Referencing Page Numbers}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      The page number on which a figure appears can be referenced with the
+      command \texttt{\textbackslash pageref\{fig:name\}}, where \texttt{fig:name}
+      corresponds to the name given in the \texttt{\textbackslash label\{\}}
+      command when the figure was defined.
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \colorbox{white}{\includegraphics[height=0.9\textheight]{figure_with_page_number_reference_example.pdf}}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{\thesubsection}
+  \framesubtitle{Conditional Referencing}
+  A command can be defined to conditionally display only the figure number if
+  the figure is on the same page as the reference or the figure number and
+  page number if the figure is on a different page.
+  \footnotesize
+  \begin{verbatim}
+  \newcommand\FigDiff[1]{Figure~\ref*{#1} on page~\pageref*{#1}}
+  \newcommand\FigSame[1]{Figure~\ref*{#1}}
+  \newcommand\Figref[1]{\ifthenelse{\value{page}=\pageref{#1}}
+                       {\FigSame{#1}}{\FigDiff{#1}}}
+  \end{verbatim}
+  \vspace{-12pt}\normalsize
+  The \texttt{varioref} package defines the \texttt{\textbackslash vref\{\}}
+  command which accomplishes the same thing as well as replacing the page
+  number with ``on the facing page'', ``on the following page'', or ``on the
+  previous page'' if the figure and reference are only one page apart.
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{\thesubsection}
+  \framesubtitle{Hyperlinking Figure References}
+    When using the package \texttt{hyperref}, the figure numbers will
+      be links to the captions of the figures.  If the caption is below the
+      figure, the image may need to be scrolled after clicking the link.  To
+      fix this put the following line in the preamble (after loading the
+      \texttt{hyperref} package)
+      \begin{verbatim}
+      \usepackage[all]{hypcap}
+      \end{verbatim}
+\end{frame}
+
+
+\section{Captions}
+\subsection{List of Figures}
+\begin{frame}
+  \frametitle{\thesubsection}
+  \framesubtitle{List of Figures}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      A list of figures can be automatically built by including the line
+      \texttt{\textbackslash listofigures} after \texttt{\textbackslash
+      begin\{document\}}.  The entry in the list of figures will be created
+      from the caption of each of the figures.
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \colorbox{white}{\includegraphics[height=0.9\textheight]{list_of_figures_example.pdf}}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\thesubsection}
+  \framesubtitle{Short Name in List of Figures}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      A shorter version of the caption can be given for use in the list of
+      figures by defining the caption as \\\texttt{\textbackslash caption[Short
+      Description]\{A really really really really really really really really
+      long caption\}}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \colorbox{white}{\includegraphics[height=0.9\textheight]{list_of_figures_short_description_example.pdf}}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{The \texttt{caption} Package}
+\begin{frame}
+  \frametitle{\thesubsection}
+  \framesubtitle{Declaring Options}
+  Captions can be customized with the \texttt{caption} package.  Options can
+  be given in two ways
+  \begin{itemize}%[]
+    \item \texttt{\textbackslash usepackage[options]caption}
+      \begin{itemize}%[]
+        \item i.e.~\texttt{\textbackslash usepackage[labelfont=bf]\{caption\}}
+      \end{itemize}
+    \item \texttt{\textbackslash captionsetup\{options\}}
+      \begin{itemize}%[]
+        \item i.e.~\texttt{\textbackslash captionsetup\{labelfont=bf\}}
+      \end{itemize}
+  \end{itemize}
+%  The \texttt{caption} package also defines the \texttt{\textbackslash
+%  captionof} command, which allows for the creation of
+%  figure captions outside of the \texttt{figure} environment.
+%  \begin{itemize}%[]
+%    \item i.e.~\texttt{\textbackslash captionof\{figure\}\{Caption text\}}
+%  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{\thesubsection}
+  \framesubtitle{Examples of Customizing the Caption}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      The \texttt{caption} accepts values for the following options: font,
+      labelfont, textfont, aboveskip, belowskip, position, parskip,
+      labelformat, labelsep, format, justification, indentation, hangindent,
+      margin, width, singlecheck.
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \colorbox{white}{\includegraphics[height=0.9\textheight]{captionsetup_example.pdf}}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\thesubsection}
+  \framesubtitle{The \texttt{\textbackslash captionof} Command}
+  The \texttt{caption} package also defines the \texttt{\textbackslash
+  captionof} command, which allows for the creation of
+  figure captions outside of the \texttt{figure} environment.
+  \begin{itemize}%[]
+    \item i.e.~\texttt{\textbackslash captionof\{figure\}\{Caption text\}}
+    \item i.e.~\texttt{\textbackslash captionof\{table\}\{Caption text\}}
+  \end{itemize}
+\end{frame}
+
+
+
+\section{Special Cases}
+\subsection{Wide Figures}
+
+\begin{frame}[fragile]
+  \frametitle{\thesubsection}
+  \framesubtitle{Two Column Figures}
+  When writing a two-column document, a figure that will span both columns
+  can be included with the \texttt{figure*} environment.
+  \begin{verbatim}
+  \begin{figure*}[htbp]
+    \includegraphics[width=\textwidth]{box.pdf}
+    \caption{A wide figure}
+  \end{figure*}
+  \end{verbatim}
+  Note: the \texttt{figure*} environment will can the image to be placed at
+  the top page after the place where it was defined.  This may cause the
+  figures to be out of order if another figure appears on the same page.
+\end{frame}
+
+\begin{frame}
+  \frametitle{\thesubsection}
+  \framesubtitle{Two Column Figures -- Example}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \colorbox{white}{\includegraphics[height=0.9\textheight]{two_column_wide_figure_example.pdf}}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \colorbox{white}{\includegraphics[height=0.9\textheight]{two_column_wide_figure_example_page_2.pdf}}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{\thesubsection}
+  \framesubtitle{Expanding Figures and Tables Into the Margin}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+  Wide figures (wider than the text) can be included by wrapping them in a
+  \texttt{\textbackslash makebox}
+      \scriptsize
+   \begin{verbatim}
+\noindent\makebox[\textwidth]{
+\includegraphics[width=1.2\textwidth]
+{box.pdf}}
+\captionof{figure}{Caption text}}
+\end{verbatim}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \colorbox{white}{\includegraphics[height=0.9\textheight]{wide_figure_example.pdf}}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Landscape Figures}
+\begin{frame}[shrink]
+  \frametitle{\thesubsection}
+  \framesubtitle{}
+  Three options for landscape images are
+  \begin{itemize}%[]
+    \item The \texttt{lscape} package: creates a \texttt{landscape}
+      environment
+      \begin{itemize}%[]
+        \item Can include figure or table environments
+        \item Works with the \texttt{longtable} environment to produce
+          muti-page landscape tables
+        \item The image will be on a separate floats page
+        \item Treat the left side as the top of the page
+      \end{itemize}
+      
+    \item The \texttt{rotating} package: creates a \texttt{sidewaysfigure}
+      environment
+      \begin{itemize}%[]
+        \item Also creates a \texttt{sidewaystable} environment
+        \item Can customize right or left rotation for one and two sided
+          documents
+        \item The image will be on a separate floats page
+      \end{itemize}
+      
+    \item The \texttt{rotating} package: creates a \texttt{\textbackslash
+      rotcaption} command which is used like the \texttt{\textbackslash caption}
+      command
+      \begin{itemize}%[]
+        \item Does not require the figure to be place on a separate floats
+          page
+        \item Requires the use of two \texttt{minipage} environments: one for
+          the figure and one for the caption
+      \end{itemize}
+      
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\thesubsection}
+  \framesubtitle{Two Column Figures -- Example}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \colorbox{white}{\includegraphics[height=0.9\textheight]{landscape_example.pdf}}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \colorbox{white}{\includegraphics[height=0.9\textheight]{sidewaysfigure_example.pdf}}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\subsection{Subfigures}
+\begin{frame}[fragile]
+  \frametitle{\thesubsection}
+  \framesubtitle{Subfigures with the \texttt{subcaption} Package}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      The \texttt{subcaption} package (loaded after the \texttt{caption})
+      package defines the \texttt{subfigure} environment.\\[12pt]
+      \scriptsize
+      \hspace{-1cm}\begin{minipage}[b]{0.5\textwidth}\begin{verbatim}
+      \begin{figure}[]
+      \begin{subfigure}[b]{0.5\linewidth}
+        \centering
+        \includegraphics[width=2cm]{aulogo.pdf}
+        \caption{Subfigure 1}
+        \label{fig:subfig1}
+      \end{subfigure}
+      \begin{subfigure}[b]{0.5\linewidth}
+        \centering
+        \includegraphics[width=2cm]{aulogo.pdf}
+        \caption{Subfigure 2}
+        \label{fig:subfig2}
+      \end{subfigure}
+      \caption{Subfigure example}
+      \label{fig:subfigexample}
+      \end{figure}
+      \end{verbatim}
+    \end{minipage}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}[]
+      \begin{subfigure}[b]{0.5\linewidth}
+        \centering
+        \includegraphics[width=2cm]{aulogo.pdf}
+        \caption{Subfigure 1}
+        \label{fig:subfig1}
+      \end{subfigure}
+      \begin{subfigure}[b]{0.5\linewidth}
+        \centering
+        \includegraphics[width=2cm]{aulogo.pdf}
+        \caption{Subfigure 2}
+        \label{fig:subfig2}
+      \end{subfigure}
+      \caption{Subfigure example}
+      \label{fig:subfigexample}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\thesubsection}
+  \framesubtitle{Referencing Subfigures}
+  Referencing subfigures is similar to referencing regular
+  figures.  Consider the subfigures on the previous slide.
+  \begin{itemize}%[]
+    \item  \texttt{\textbackslash ref\{fig:subfig1\}}$\Rightarrow$ \ref{fig:subfig1}
+    \item  \texttt{\textbackslash ref\{fig:subfig2\}}$\Rightarrow$ \ref{fig:subfig2}
+    \item  \texttt{\textbackslash ref\{fig:subfigexample\}}$\Rightarrow$
+      \ref{fig:subfigexample}
+    \item  \texttt{\textbackslash subref\{fig:subfig1\}}$\Rightarrow$ \subref{fig:subfig1}
+    \item  \texttt{\textbackslash subref\{fig:subfig2\}}$\Rightarrow$ \subref{fig:subfig2}
+  \end{itemize}  
+\end{frame}
+
+\begin{frame}
+  \frametitle{\thesubsection}
+  \framesubtitle{Customizing Subcaptions}
+  The subcaptions can also be customized like the regular captions by either
+  passing options when loading the \texttt{subcaption} command, or with the
+  commands:
+  \begin{itemize}%[]
+    \item \texttt{\textbackslash captionsetup[sub]\{\ldots\}} for all
+      subcaptions
+    \item \texttt{\textbackslash captionsetup[subfigure]\{\ldots\}} for only
+      figure subcaptions
+    \item \texttt{\textbackslash captionsetup[subtable]\{\ldots\}} for only
+      table subcaptions
+  \end{itemize}
+\end{frame}
+
+\subsection{The \texttt{wrapfig} Package}
+\begin{frame}[fragile]
+  \frametitle{\thesubsection}
+  \framesubtitle{Wrapping Text Around Figures}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      The \texttt{wrapfig} package enables a \texttt{wrapfigure} environment
+      that will allow text to wrap around a figure.
+
+      \scriptsize
+   \begin{verbatim}
+\begin{wrapfigure}{r}{0.5\textwidth}
+\centering
+\includegraphics[width=0.4\textwidth]
+  {aulogo.pdf}
+\caption{A figure included in a 
+\texttt{wrapfigure} environment}
+\end{wrapfigure}
+\end{verbatim}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \colorbox{white}{\includegraphics[height=0.9\textheight]{wrapfig_example.pdf}}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{The \texttt{overpic} Package}
+\begin{frame}
+  \frametitle{\thesubsection}
+  \framesubtitle{}
+    The \texttt{overpic} package creates an \texttt{overpic} environment,
+    which can be used in place of the \texttt{\textbackslash includegraphics}
+    command.  This allows figures, text, tables, etc.\ to be placed of top of
+    a figure.  The objects can be placed at relative or absolute coordinates
+    with respect to the image. 
+    \begin{itemize}%[]
+      \item \texttt{\textbackslash usepackage\{overpic\}} for relative
+        coordinates
+      \item \texttt{\textbackslash usepackage[abs]\{overpic\}} for absolute
+        coordinates
+      \item Place objects with the \texttt{\textbackslash put(x,y)\{\}} command
+      \item The \texttt{overpic} environment accepts the same options as the
+        \texttt{\textbackslash includegraphics} command
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{\thesubsection}
+  \framesubtitle{Stacking Figures}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \scriptsize
+   \begin{verbatim}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]
+  {SpecificHeatSpatialChange.pdf}
+\end{figure}
+\end{verbatim}
+
+   \begin{verbatim}
+\begin{figure}[htbp]
+\centering
+\begin{overpic}[width=\linewidth]
+  {SpecificHeatSpatialChange.pdf}
+\put(15,38){\includegraphics%
+[width=0.15\textwidth]%
+{MapSpatialChange4.pdf}}
+\end{overpic}
+\end{figure}
+\end{verbatim}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}[htbp]
+         \centering
+         \includegraphics[width=1\linewidth]%
+           {SpecificHeatSpatialChange.pdf}
+         \end{figure}
+         \vspace{-24pt}
+      \begin{figure}[htbp]
+         \centering
+         \begin{overpic}[width=1\linewidth]%
+           {SpecificHeatSpatialChange.pdf}
+           \put(15,38){\includegraphics[width=0.15\textwidth]{MapSpatialChange4.pdf}}
+           \end{overpic}
+         \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{\thesubsection}
+  \framesubtitle{Stacking Figures}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      The \texttt{grid} option can be given to the \texttt{overpic}
+      environment to aid in placement.
+      \scriptsize
+   \begin{verbatim}
+\begin{figure}[htbp]
+\centering
+\begin{overpic}%
+  [width=\linewidth,grid]
+  {SpecificHeatSpatialChange.pdf}
+\put(15,38){
+  \includegraphics%
+  [width=0.15\textwidth]%
+  {MapSpatialChange4.pdf}}
+\end{overpic}
+\end{figure}
+\end{verbatim}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}[htbp]
+         \centering
+         \begin{overpic}[width=1\linewidth,grid]%
+           {SpecificHeatSpatialChange.pdf}
+           \put(15,38){\includegraphics[width=0.15\textwidth]{MapSpatialChange4.pdf}}
+           \end{overpic}
+         \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Fonts in Graphics}
+\begin{frame}
+  \frametitle{\thesubsection}
+  \framesubtitle{}
+  When images are labeled in an external program, the fonts of the labels
+  will not match the rest of the \LaTeX{} document.  Two ways to remedy this
+  are:
+  \begin{itemize}%[]
+    \item Label the images with \texttt{overpic}
+      \begin{itemize}%[]
+        \item Use a \texttt{\textbackslash put(x,y)\{\}} for each word
+        \item Takes a long time
+        \item If the size of the font or image changes, then the position
+          will have to be corrected
+      \end{itemize}
+    \item Label the image in Inkscape and export to pgf
+     \begin{itemize}%[]
+       \item Create text labels in Inkscape
+       \item Export to pdf with the ``PDF+LaTeX: Omit text in PDF, and create
+         LaTeX file'' option selected
+       \item Requires Inkscape $\geq$ 0.48 (currently still in development)
+     \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{\thesubsection}
+  \framesubtitle{Labeling with \texttt{overpic}}
+\footnotesize
+\begin{center}
+\begin{overpic}[width=.9\textwidth]
+  {Apparatus.pdf}
+\put(5,51){Aluminum}
+\put(5.5,48){Substrate}
+\put(24,51){Resistance}
+\put(26,48){Heaters}
+\put(42.75,51){Thermistors }
+\put(43.75,48){(Junction)}
+\put(64,51){Resistance}
+\put(66,48){Heaters}
+\put(85,48){PCB}
+\put(89.5,36){Fluid}
+\put(89,33){Outlet}
+\put(40.5,19){Thermocouples}
+\put(43,16){(Reference)}
+\put(58,11){Fluid}
+\put(58.25,8){Inlet}
+\end{overpic}
+\end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\thesubsection}
+  \framesubtitle{Labeling Images with Inkscape}
+  \begin{figure}[]
+    \centering
+    \begin{subfigure}[b]{0.45\linewidth}
+      \centering
+      \includegraphics[width=\linewidth]{InkscapePDFLaTeX_example_preconversion.pdf}
+      \caption{Prior to exporting with the \LaTeX{} option}
+    \end{subfigure}
+    \tiny
+    \begin{subfigure}[b]{0.45\linewidth}
+        \centering\def\svgwidth{\columnwidth}
+        \includesvg{InkscapePDFLaTeX_example}
+        \caption{After text has been recompiled with \LaTeX{}}
+    \end{subfigure}
+    \caption{Example of using the export to \LaTeX{} option in Inkscape.}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{\thesubsection}
+  \framesubtitle{Using the \texttt{inkscapelatex} Package}
+  When using the Inkscape export to \LaTeX{} option, two files will be
+  created: \texttt{filename.pdf} and \texttt{filename.pdf\_tex}.  The
+  \texttt{filename.pdf\_tex} is a pgf
+  file than will pull in \texttt{filename.pdf} and place the text over it.  This can
+  be included in a \LaTeX{} document with the following
+  \begin{verbatim}
+\begin{figure}[]
+  \centering
+  \def\svgwidth{\columnwidth}
+  \input{filename.pdf_tex}
+\end{figure}
+  \end{verbatim}
+  where \texttt{\textbackslash svgwidth} is used to control the width of the
+  image
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{\thesubsection}
+  \framesubtitle{The \texttt{inkscapelatex} Package}
+  The \texttt{inkscapelatex} package (included in the source directory of this
+  file) can be used on Linux/Unix based system to automatically update the .pdf and
+  .pdf\_tex files when \LaTeX{} is run if the .svg file has changed if the
+  \texttt{-shell-escape} option is included in the \texttt{pdflatex} command.
+  Loading the package  will create a new command \texttt{\textbackslash
+  includesvg} command which can be used as
+  \begin{verbatim}
+\begin{figure}[]
+  \centering
+  \def\svgwidth{\columnwidth}
+  \includesvg{filename}
+\end{figure}
+  \end{verbatim}
+  where \texttt{filename} is given without the extension.
+\end{frame}
+
+\section*{}
+\begin{frame}
+  \frametitle{Further Reading}
+  \framesubtitle{}
+  Further details can be found at the following links:
+  \scriptsize
+  \url{http://www.ctan.org/tex-archive/help/Catalogue/entries/epslatex.html}
+  \url{http://www.ctan.org/tex-archive/help/Catalogue/entries/overpic.html}
+  \url{http://www.ctan.org/tex-archive/help/Catalogue/entries/svg-inkscape.html}
+  \url{http://www.ctan.org/tex-archive/help/Catalogue/entries/caption.html}
+  \url{http://www.ctan.org/tex-archive/help/Catalogue/entries/lscape.html}
+  \url{http://www.ctan.org/tex-archive/help/Catalogue/entries/wrapfig.html}
+\end{frame}
+
+\end{document}

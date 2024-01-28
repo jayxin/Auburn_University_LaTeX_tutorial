@@ -1,0 +1,186 @@
+\documentclass[10pt]{beamer}
+\title{An Introduction to JabRef}
+\author{Brian Lilly}
+\date{July 19, 2010}
+
+\usetheme{Warsaw}
+\setbeamertemplate{footline}[frame number]
+
+\usefonttheme[]{serif}
+\usepackage{amsmath, latexsym, color, graphicx}
+\usepackage{epsf, epsfig,subfigure}
+\usepackage{amsfonts,multicol}
+\usepackage{hyperref}
+
+\begin{document}
+\maketitle
+\begin{frame}
+\frametitle{What is JabRef?}
+\begin{itemize}
+\item Organizes BibTeX files in databases so they can be more easily manipulated
+\item Java - Not OS Dependent
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{What is BibTeX?}
+\begin{itemize}
+\item ``Reference Management Software"
+\item Contains information needed to cite a source
+	\begin{itemize}
+	\item Author(s)
+	\item Publication
+	\item Volumes, Page Numbers, etc.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Two Ways to Use JabRef}
+\begin{itemize}
+\item \url{http://jabref.sourceforge.net/}
+\item Standalone version
+\item Web Version
+	\begin{itemize}
+	\item Allows use of JabRef without installing
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Getting BibTeX Files}
+\begin{itemize}
+\item \href{http://apps.isiknowledge.com/WOS_GeneralSearch_input.do?product=WOS&search_mode=GeneralSearch&SID=4El@7A2mGNLCA3odgOE&preferencesSaved=&highlighted_tab=WOS}{ISI Web of Science}
+	\begin{itemize}
+	\item Search
+	\item Check boxes of articles
+	\item ``Add to Marked List"
+	\item Check all of the boxes
+	\item Change ``Other Reference Software" to ``Bibtex" and ``Save to File"
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Entry Editor}
+\begin{itemize}
+\item Can change what columns are shown in the main window
+	\begin{itemize}
+	\item Entry Table Columns (Options$\Rightarrow$Preferences$\Rightarrow$Entry Table Columns)
+	\end{itemize}
+\item Uppercase letters: \{U\}ppercase or Options$\Rightarrow$Preferences$\Rightarrow$General$\Rightarrow$File$\Rightarrow$``Store the following fields with braces around capital letters"
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Linking}
+\begin{itemize}
+\item Linking to a url (Entry Editor$\Rightarrow$General$\Rightarrow$url)
+\item Linking to a pdf (Entry Editor$\Rightarrow$General$\Rightarrow$File$\Rightarrow$+)
+\item Can link to pdfs relative to the Bibtex database file's location
+	\begin{itemize}
+	\item Set a File Directory (File$\Rightarrow$Database Properties$\Rightarrow$File directory)
+	\item Put in the directory for the folder the database is in
+	\item Where the full path for the pdf was before: .{\textbackslash}nameofthefile.pdf or .{\textbackslash}subfolder{\textbackslash}nameofthefile.pdf
+	\item Then, when the database and articles are moved, change the File directory to where they have been moved
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Searching}
+\begin{itemize}
+\item Search button: Magnifying glass in Toolbar or ctrl-f
+	\begin{itemize}
+	\item Can use logical operators:
+	\item field = keyword
+	\item field = ``multiple word phrase"
+	\item field$|$anotherfield = keyword and ``multiple word phrase"
+	\item (field = keyword or field$|$anotherfield = ``multiple word phrase") and not field = keyword
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Strings}
+\begin{itemize}
+\item To open string editor: BibTeX$\Rightarrow$Edit Strings
+\item Strings are composed of a ``name" and a ``content"
+	\begin{itemize}
+	\item The name would be some text enclosed by \#s, example: \#asdf\#
+	\item The content would then be some other text, example: Left Hand Home Row
+	\end{itemize}
+\item Anytime \#asdf\# appears in a field, it will reference the text Left Hand Home Row
+\item To have strings applied for any non-standard Bibtex fields
+	\begin{itemize}	
+	\item Options$\Rightarrow$Preferences$\Rightarrow$File$\Rightarrow$``Resolve strings for all fields except:"
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Journal Abbreviations}
+\begin{itemize}
+\item Set up a journal 
+abbreviation list (Options$\Rightarrow$Manage journal abbreviations)
+	\begin{itemize}
+	\item Create a file
+	\item Add abbreviations exactly (Case-sensitive and with curly brackets)
+	\end{itemize}
+\item If everything is moved to another computer, import abbreviations file into JabRef as an ``Existing File"
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Groups}
+\begin{itemize}
+\item Groups button: Gray squares button in toolbar
+\item Add new groups either manually or by using a search method
+\item Can select multiple groups and use Settings$\Rightarrow$Union and Settings$\Rightarrow$Intersection
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{BibTeX Keys}
+\begin{itemize}
+\item These are used to cite individual sources within a LaTeX document
+	\begin{itemize}
+	\item {\textbackslash}cite\{BibTeX Key\}
+	\end{itemize}
+\item Generate new key by selecting the article in the main window and hitting ctrl-g or clicking the wand button
+\item Options$\Rightarrow$Preferences$\Rightarrow$BibTeX key generator
+\item Made up of field markers: [field]
+\item The default pair of field markers is [auth][year]
+	\begin{itemize}
+	\item Makes a BibTeX key out of the last name of the first author, [auth], followed by the year of publication, [year]
+	\end{itemize}
+\item See: \url{http://jabref.sourceforge.net/help/LabelPatterns.php} for a list of some ``special" field markers
+	\begin{itemize}
+	\item ``Special" because they only use a portion of a field ([auth], above, is one of these)
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Other Stuff}
+\begin{itemize}
+\item Can use plugins to extend JabRef's abilities
+\item Can add custom tabs to the Entry Editor
+	\begin{itemize}
+	\item Options$\Rightarrow$Set up general fields
+	\item One tab on each line: NewTabName:field1;field2;field3;etc.
+	\end{itemize}
+\item Probably a lot of other things that I don't even know about
+\item See \url{http://jabref.sourceforge.net/help/Contents.php} for more help
+	\begin{itemize}
+	\item This is where I got most of the information for this presentation
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{?}
+\centering\Huge ?
+\end{frame}
+
+\end{document}

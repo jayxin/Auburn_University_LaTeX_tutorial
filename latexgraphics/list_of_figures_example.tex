@@ -1,0 +1,18 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage[font=Large]{caption}
+\begin{document}
+\LARGE
+\listoffigures
+\vspace{36pt}
+The list of figures is automatically built by including the line
+\texttt{\textbackslash listoffigures} after\\ \texttt{\textbackslash
+begin\{document\}}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.75\textwidth]{aulogo.pdf}
+  \caption{\large A really really really really really really long caption.}
+  \label{fig:aulogo}
+\end{figure}
+
+\end{document}

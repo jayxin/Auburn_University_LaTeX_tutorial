@@ -1,0 +1,22 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{caption}
+
+
+\begin{document}
+
+\Large
+If a wide figure (one that is wider than the text) is included in a regular figure environment, it will extend into the right margin.
+\begin{figure}[htbp]
+  \includegraphics[width=1.2\textwidth]{box.pdf}
+  \caption{A wide figure in a regular figure environment}
+\end{figure}
+
+By using the \texttt{\textbackslash makebox} command, a wide figure can be made to extend into both margins.\\
+
+\noindent\makebox[\textwidth]{
+\includegraphics[width=1.2\textwidth]{box.pdf}}
+\captionof{figure}{A wide figure included in a \texttt{\textbackslash makebox}}
+
+
+\end{document}

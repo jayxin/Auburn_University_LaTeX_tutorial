@@ -1,0 +1,135 @@
+\documentclass{beamer}
+\usetheme[hideothersubsections]{AUTheme}
+\usefonttheme[]{serif}
+
+\usepackage{pgf,pgfpages,epic,eepic}
+%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border
+%shrink=0.5in]
+
+\usepackage{graphicx}
+\usepackage{amsmath, latexsym, color, amssymb, here}
+\usepackage{epsf, epsfig, pifont,tikz,subfigure}
+\usepackage{graphics, calrsfs}
+\usepackage{times}
+\usepackage{fancybox,calc}
+\usepackage{palatino,mathpazo}
+%
+%\documentclass{article}
+%\usepackage{graphicx,anysize}
+\usepackage{pgfplots,verbatim}
+% ----------------------------------------------------------------
+% ----------------------------------------------------------------
+%\marginsize{1in}{1in}{1in}{1in}%
+%\renewcommand{\baselinestretch}{1.3}
+\begin{document}
+
+\begin{frame}\frametitle{Intro to PGFPlots and Ti\emph{k}Z}
+
+\begin{itemize}
+	\item 
+draws high-quality function plots in normal or logarithmic scaling with a user-friendly
+interface directly in TEX. 
+\item user supplies axis labels, legend entries and the plot coordinates for one
+or more plots 
+\item pgfplots applies axis scaling, computes any logarithms and axis ticks and draws
+the plots, supporting line plots, scatter plots, piecewise constant plots, bar plots, area plots, mesh, and
+surface plots and some more. 
+\item based on Till Tantau's package pgf/TikZ.
+\end{itemize}
+\end{frame}
+
+\noindent
+%$\sin x \approx x$
+\frame {\frametitle{stem plot}
+
+\begin{center}
+
+\input test5.tikz
+\end{center}
+}
+
+\begin{frame}[fragile]
+
+\tiny
+\verbatiminput{test5.tikz}
+
+\end{frame}
+
+\frame{
+\input test4.tikz
+}
+
+
+\frame{
+\begin{tikzpicture}
+\begin{axis}[
+xlabel=Cost,
+ylabel=Error]
+\addplot[color=red,mark=x] coordinates {
+(2,-2.8559703)
+(3,-3.5301677)
+(4,-4.3050655)
+(5,-5.1413136)
+(6,-6.0322865)
+(7,-6.9675052)
+(8,-7.9377747)
+};
+\end{axis}
+\end{tikzpicture}
+}
+
+\frame{
+% Preamble: \pgfplotsset{width=7cm,compat=newest}
+\begin{tikzpicture}
+\begin{axis}[
+axis equal=true,
+axis x line=middle,
+axis y line=middle]
+%xlabel=$x$,
+%ylabel={$f_0.5(x)$}
+]
+% use TeX as calculator:
+\addplot[mark=none,smooth,domain=-1.5:1.5] {x^2*(abs(x)<0.5) + (0.5^2 + 2*0.5*(abs(x)-0.5))*(1-(abs(x)<0.5))};
+\end{axis}
+\end{tikzpicture}
+}
+
+\frame{
+\begin{verbatim}
+\begin{tikzpicture}
+\begin{axis}[
+axis equal=true,
+axis x line=middle,
+axis y line=middle]
+]
+% use TeX as calculator:
+\addplot[mark=none,smooth,domain=-1.5:1.5] {x^2*(abs(x)<0.5) + (0.5^2 + 2*0.5*(abs(x)-0.5))*(1-(abs(x)<0.5))};
+\end{axis}
+\end{tikzpicture}
+\end{verbatim}
+}
+
+\frame{
+\begin{tikzpicture}
+\begin{axis}[
+axis x line=middle,
+axis y line=middle]
+% use TeX as calculator:
+%\addplot[mark=none,domain=-4:4,samples=200] {x^2 - x +4};
+\addplot[mark=none] coordinates {
+(-7,-6) 
+(-4,-6) 
+(-4,-3) 
+(-2,-3) 
+(-2,-1.5) 
+(-1,-1.5) 
+(-1,-0.75)
+(-0.5,0) 
+(0.5,0)  
+};
+\end{axis}
+\end{tikzpicture}
+}
+
+\end{document}
+% ----------------------------------------------------------------

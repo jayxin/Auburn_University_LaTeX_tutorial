@@ -1,0 +1,372 @@
+#LyX 1.6.6.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass beamer
+\begin_preamble
+\usetheme{Madrid}
+\end_preamble
+\use_default_options true
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family rmdefault
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+LyX: The WYSIWYM Document Processor
+\end_layout
+
+\begin_layout Author
+Robert Thetford, Jr.
+\end_layout
+
+\begin_layout Date
+July 9, 2010
+\end_layout
+
+\begin_layout BeginFrame
+Outline
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout Section
+What is LyX?
+\end_layout
+
+\begin_layout BeginFrame
+What Is LyX?
+\end_layout
+
+\begin_layout Standard
+LyX is document processor that works as a front end to LaTeX.
+ It allows for instant previewing of the document from the input side of
+ the process, creating a near WYSIWYG version of LaTeX, coined by LyX users
+ as WYSIWYM.
+\end_layout
+
+\begin_layout Standard
+We'll overview three of the common document classes:
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Enumerate
+Article
+\end_layout
+
+\begin_layout Enumerate
+Letter
+\end_layout
+
+\begin_layout Enumerate
+Beamer
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout Section
+Article
+\end_layout
+
+\begin_layout BeginFrame
+Article
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+Article
+\family default
+ is the default document class when LyX is first opened.
+ The structure of sections, titles, and lists within the document works
+ the same as in LaTeX, but are entered differently.
+ This will be explained in the next slide.
+ These 
+\begin_inset Quotes eld
+\end_inset
+
+paragraph styles
+\begin_inset Quotes erd
+\end_inset
+
+ are refered to, in LyX, as environments.
+ 
+\family sans
+Article
+\family default
+ allows for other typical scientific document environments such as tables,
+ figures, math expressions, etc.
+ 
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout Subsection
+Sections, Titles, and Lists
+\end_layout
+
+\begin_layout BeginFrame
+Article
+\end_layout
+
+\begin_layout FrameSubtitle
+Sections, Titles, and Lists
+\end_layout
+
+\begin_layout Standard
+Sections are very straightforward.
+\end_layout
+
+\begin_layout Itemize
+Click the cursor to the desired line in the document
+\end_layout
+
+\begin_layout Itemize
+Click the 
+\family sans
+Environment
+\family default
+ dropbox (the leftmost element on the buttonbar)
+\end_layout
+
+\begin_layout Itemize
+Select 
+\family sans
+Section
+\family default
+, 
+\family sans
+Subsection
+\family default
+, 
+\family sans
+Subsubsection
+\family default
+, 
+\family sans
+Paragraph
+\family default
+, or 
+\family sans
+Subparagraph
+\end_layout
+
+\begin_layout Standard
+This automatically makes the selected line into the desired environment.
+ Using this same method, a selected line can be made into an unnumbered
+ section (
+\family sans
+Section*
+\family default
+), 
+\family sans
+Title
+\family default
+, 
+\family sans
+Author
+\family default
+, 
+\family sans
+Enumerate
+\family roman
+ list
+\family default
+, 
+\family sans
+Itemize
+\family roman
+ list
+\family default
+, etc.
+ All these environments are selectable in the dropbox.
+ 
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout Subsection
+Tables
+\end_layout
+
+\begin_layout BeginFrame
+Article
+\end_layout
+
+\begin_layout FrameSubtitle
+Tables
+\end_layout
+
+\begin_layout Standard
+Tables are very straightforward.
+ 
+\end_layout
+
+\begin_layout Itemize
+Create a new table with 
+\family sans
+Insert
+\family default
+\SpecialChar \menuseparator
+
+\family sans
+Table
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Itemize
+Specify how many columns and rows 
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Itemize
+Click each and edit each individual cell
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Itemize
+Use the Table Toolbar to toggle borderlines and designate multicolumns (multirow
+s not supported by LyX)
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout NoteItem
+Tables can also be created with the Insert Table button
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout Subsection
+Figures
+\end_layout
+
+\begin_layout BeginFrame
+Article
+\end_layout
+
+\begin_layout FrameSubtitle
+Figures
+\end_layout
+
+\begin_layout Standard
+Figures are very straightforward.
+ In LyX, they are refered to as graphics.
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Itemize
+Create a new graphic with 
+\family sans
+Insert
+\family default
+\SpecialChar \menuseparator
+
+\family sans
+Graphics
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Itemize
+Specify an image to insert (all known image formats will work)
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Itemize
+Optional: Specify a scale percentage, scale by width, or scale by height
+ value
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Article
+\end_layout
+
+\begin_layout FrameSubtitle
+Figures
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\end_body
+\end_document

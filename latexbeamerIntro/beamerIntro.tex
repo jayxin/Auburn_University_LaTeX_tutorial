@@ -1,0 +1,481 @@
+\documentclass[article]{beamer}
+\usetheme{Warsaw}
+\setbeamertemplate{footline}[frame number]
+
+
+\usefonttheme[]{serif}
+\usepackage{amsmath, latexsym, color, graphicx, amssymb, bm, here}
+\usepackage{epsf, epsfig, pifont,tikz,subfigure}
+\usepackage{graphics, calrsfs}
+\usepackage{times}
+\usepackage{fancybox,calc}
+\usepackage{palatino,mathpazo}
+\usepackage{amsfonts}
+%\usepackage{wrapfig}
+%\usepackage{multicol}
+\usepackage{sidecap}
+
+
+
+\title{Presentation using \LaTeX{} Beamer}
+\author{Tao Ma}
+\institute{Electrical and Computer Engineering \\ Auburn University}
+\date{\scriptsize{\today}}
+
+
+
+\AtBeginSection[]
+{
+  \begin{frame}{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Frame 1
+
+\maketitle
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Frame 2
+\begin{frame}
+\frametitle{Outline}
+\tableofcontents
+\end{frame}
+\section{Introduction}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Frame 3
+\begin{frame}[fragile]
+\frametitle{About Beamer}
+\begin{itemize}
+\item  Beamer - a LaTeX class for creating presentations. 
+\item  Different from WYSWYG programs. 
+\item  A Beamer presentation is like any other LaTeX document:
+\begin{itemize}
+\item It has a preamble and a body.
+\item The body contains sections and subsections. 
+\item The different slides are put in environments.
+\item Slides are structured using itemize and enumerate environments, or plain text.
+\end{itemize} 
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Frame 4
+\section{Document Structure}
+\subsection{Example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Frame 5
+
+\begin{frame}[fragile]
+\frametitle{A Simple Example}
+\scriptsize{\tt{
+\alert<2>{\textbackslash documentclass\{beamer\}\\ \vspace{0.1cm}
+
+\textbackslash title\{\textbackslash LaTeX\{\} Beamer Class Introduction\} \\
+\textbackslash author\{Tao Ma\}\\
+\textbackslash institute\{Electrical and Computer Engineering \textbackslash\textbackslash Auburn University\}\\
+\textbackslash date\{\textbackslash scriptsize\{\textbackslash today\}\}
+} \\ \vspace{0.3cm}
+
+\alert<3>{\textbackslash begin\{document\} \\ \vspace{0.1cm}
+
+\textbackslash maketitle\\ \vspace{0.1cm}
+
+\textbackslash section\{Section 1\}\\
+\textbackslash begin\{frame\}\\
+\textbackslash frametitle\{Frame 1 Name\}\\
+\textbackslash Here is one slide.\\
+\textbackslash end\{frame\}\\ \vspace{0.1cm}
+
+\textbackslash section\{Section 2\}\\
+\textbackslash frame\{\\
+\textbackslash frametitle\{Frame 2 Name\}\\
+\textbackslash Here is another slide.\\
+\}\\ \vspace{0.1cm}
+
+\textbackslash end\{document\}\\
+}
+}}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Frame 6
+
+\subsection{Preamble}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Frame 7
+\begin{frame}[fragile]
+\frametitle{Preamble}
+\scriptsize{\tt{
+\alert<2>{
+\textbackslash documentclass[10pt]\{beamer\}\\
+\textbackslash usetheme\{Warsaw\}\\
+\textbackslash setbeamertemplate\{footline\}[frame number]\\
+}
+\vspace{0.5cm}
+\alert<3>{
+\textbackslash usefonttheme[]\{serif\}\\
+\textbackslash usepackage\{amsmath, latexsym, color, graphicx\}\\
+\textbackslash usepackage\{epsf, epsfig,subfigure\}\\
+\textbackslash usepackage\{amsfonts,multicol\}\\
+}
+\vspace{0.5cm}
+\alert<4>{
+\textbackslash newcommand\{\textbackslash tbs\}\{\textbackslash textbackslash\}\\
+\textbackslash definecolor\{cRed\}\{rgb\}\{1, 0, 0\}\\
+}
+}}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Frame 8
+
+
+\begin{frame}[fragile]
+\frametitle{Preamble}
+\framesubtitle{Choosing a Theme}
+
+Different themes can be selected by changing the\\
+\begin{verbatim}
+\usetheme{Warsaw}
+\end{verbatim}
+\begin{block}{Themes}
+{
+\begin{center}
+\begin{tabular}{cccc}
+Antibes & Bergen & Berlin & Madrid\\ 
+Paloalto 	& Pittsburgh & Rochester & Singapore \\
+\end{tabular}
+\end{center}
+} \vspace{-0.5cm}
+\end{block}
+%\begin{verbatim}
+%\usecolortheme{...}
+%\end{verbatim}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Frame 9
+\subsection{Body}
+
+\begin{frame}
+\frametitle{Body}
+
+\scriptsize{\tt{
+\alert{\textbackslash begin\{document\}} \\ \vspace{0.2cm}
+\textbackslash maketitle\\ \vspace{0.2cm}
+
+\textbackslash section\{Section 1\}\\
+\textbackslash begin\{frame\}\\
+\textbackslash frametitle\{Frame 1 Name\}\\
+\textbackslash Here is one slide.\\
+\textbackslash end\{frame\}\\ \vspace{0.2cm}
+
+\textbackslash section\{Section 2\}\\
+\textbackslash frame\{\\
+\textbackslash frametitle\{Frame 2 Name\}\\
+\textbackslash Here is another slide.\\
+\}\\ \vspace{0.2cm}
+
+\alert{\textbackslash end\{document\}}\\
+}}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Frame 10
+
+\begin{frame}
+\frametitle{Making the Title Frame}
+
+Use the following commands in your preamble:
+\begin{block}{Commands for the title frame}
+\scriptsize{\tt{
+\textbackslash title\{...\} \\
+\textbackslash subtitle\{...\} \\
+\textbackslash author\{...\}\\
+\textbackslash institute\{...\}\\
+\textbackslash date\{...\} \\
+}}
+\end{block}
+and the command \textbackslash \tt{maketitle}, 
+\begin{block}{Generating the title frame in the body}
+\scriptsize{\tt{
+\textbackslash begin\{document\} \\ 
+\textbackslash maketitle\\ 
+\vdots
+\textbackslash end\{document\}\\
+}}
+\end{block}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Frame 11
+
+\begin{frame}
+\frametitle{Creating a Frame}
+
+Creating a frame use with commands:
+\begin{block}{}
+\scriptsize{\tt{
+\textbackslash begin\{frame\} \\
+\textbackslash frametitle\{...\} \\
+\textbackslash framesubtitle\{...\} \\
+...\\
+\textbackslash end\{frame\}
+}}
+\end{block}
+Or, 
+\begin{block}{}
+\scriptsize{\tt{
+\textbackslash frame\{ \\
+\textbackslash frametitle\{...\}\\
+\textbackslash framesubtitle\{...\}\\
+...\\
+\}
+}}
+\end{block}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Frame 12
+
+\begin{frame}[fragile]
+\frametitle{Section and Subsections}
+Section specifications are declared between the frames.\\
+\vspace{1cm}
+\scriptsize{\tt{
+...\\
+\textbackslash end\{frame\}\\
+\vspace{0.5cm}
+\alert{
+\textbackslash section\{section name\}\\
+\textbackslash subsection\{subsection name\}\\
+\textbackslash subsubsection\{subsubsection name\}}\\
+\vspace{0.5cm}
+\textbackslash begin\{frame\}\\
+...\\
+}
+}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Frame 13
+\begin{frame}[fragile]
+\frametitle{Generating the Outline Frame}
+
+The outline of your presentation can be added as follows,\\
+
+\begin{block}{manually}
+\scriptsize{\tt{
+...\\
+\textbackslash end\{frame\}\\
+\vspace{0.1cm}
+\textbackslash begin\{frame\}\\
+\textbackslash frametitle\{Outline\}\\
+\textbackslash tableofcontents[currentsection]\\
+\textbackslash end\{frame\}\\
+\vspace{0.2cm}
+\textbackslash begin\{frame\}\\
+...\\
+}}
+\end{block}
+
+\begin{block}{automatically}
+\scriptsize{\tt{
+...\\
+\textbackslash AtBeginSection[]\{\\
+\textbackslash begin\{frame\}\{Outline\}\\
+\textbackslash tableofcontents[currentsection]\\
+\textbackslash end\{frame\}\}\\
+...\\
+}}
+\end{block}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Frame 14
+\section{Frame Structure}
+\subsection{Column}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Frame 15
+\begin{frame}[fragile]
+\frametitle{Column}
+\begin{block}{Example: two columns}\scriptsize{
+\textbackslash begin\{columns\}\\
+\textbackslash column\{.4\textbackslash textwidth\}\\
+Left column\\
+\textbackslash column\{.4\textbackslash textwidth\}\\
+Right column\\
+\textbackslash end\{columns\}\\
+}
+\end{block}
+\vspace{1cm}
+\onslide<2>{
+\begin{columns}
+\column{.4\textwidth}
+Left column\\
+\column{.4\textwidth}
+Right column\\
+\end{columns}
+}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Frame 16
+\subsection{Block}
+\begin{frame}
+\frametitle{Block}
+
+\alert{\textbackslash begin\{block\}}\{Beamer Introduction\}\\
+Beamer is a \{\textbackslash LaTeX\} class.\\
+\alert{\textbackslash end\{block\}}\\
+\vspace{1cm}
+\onslide<2->{\begin{block}{Beamer Introduction}
+Beamer is a { \LaTeX} class.
+\end{block}}
+\vspace{1cm}
+\onslide<3->{
+Other choices: \tt{example}, \tt{lemma}, \tt{proof}.}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Frame 17
+\subsection{Lists}
+\begin{frame}[fragile]
+\frametitle{List-itemize}
+
+\begin{columns}
+\column{.5\textwidth}
+\begin{block}
+\scriptsize{
+\begin{verbatim}
+\begin{itemize}
+\item The first one.
+\item The second one.
+\begin{itemize}
+\item The larger one.
+\item The smaller one.
+\end{itemize}
+\item The third one.
+\end{itemize}
+\end{verbatim}
+}
+\end{block}
+\column{.5\textwidth}
+\onslide<2>{
+\begin{itemize}
+\item The first one.
+\item The second one.
+\begin{itemize}
+\item The larger one.
+\item The smaller one.
+\end{itemize}
+\item The third one.
+\end{itemize}}
+\end{columns}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Frame 18
+\begin{frame}[fragile]
+\frametitle{List-enumerate}
+
+\begin{columns}
+\column{.5\textwidth}
+\begin{block}
+\scriptsize{
+\begin{verbatim}
+\begin{enumerate}
+\item The first one.
+\item The second one.
+\begin{enumerate}
+\item The large one.
+\item The small one.
+\end{enumerate}
+\item The third one.
+\end{enumerate}
+\end{verbatim}
+}
+\end{block}
+\column{.5\textwidth}
+\onslide<2>{
+\begin{enumerate}
+\item The first one.
+\item The second one.
+\begin{enumerate}
+\item The large one.
+\item The small one.
+\end{enumerate}
+\item The third one.
+\end{enumerate}
+}
+\end{columns}
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Frame 19
+\section{Overlays}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Frame 20
+\begin{frame}[fragile]
+\frametitle{Simple Overlays Using {\tt pause}}
+\setbeamercovered{dynamic}
+\begin{itemize}
+\item  Beamer overlay frame 1\\ \pause
+\item  Beamer overlay frame 2\\ \pause
+\item  Beamer overlay frame 3\\ 
+\end{itemize}
+\pause
+\scriptsize{
+\begin{verbatim}
+\begin{frame}[fragile]
+\frametitle{Simple Overlays Using {\tt pause}}
+\setbeamercovered{dynamic}
+\begin{itemize}
+\item  Beamer overlay frame 1\\ \pause
+\item  Beamer overlay frame 2\\ \pause
+\item  Beamer overlay frame 3\\ 
+\end{itemize}
+\end{verbatim}}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Frame 21
+\begin{frame}[fragile]
+\frametitle{Advanced Overlays Using \tt{onslide}}
+\setbeamercovered{invisible}
+{\Huge
+\begin{center}
+\begin{tabular}{c|c|c}
+\onslide<9->{8} & \onslide<8->{7} & \onslide<2->{1} \\ \hline
+\onslide<6->{5} & \onslide<3->{2} & \onslide<5->{4} \\ \hline
+\onslide<10->{9} & \onslide<7->{6} & \onslide<4->{3}
+\end{tabular}
+\end{center}
+}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Frame 22
+\begin{frame}[fragile]
+\frametitle{}
+\begin{center}
+\Huge{\color{blue}{Questions?}}
+\end{center}
+\end{frame}
+
+\end{document}

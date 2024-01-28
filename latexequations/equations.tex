@@ -1,0 +1,194 @@
+\documentclass{beamer}
+
+\usetheme{AUTheme}
+\usefonttheme[onlymath]{serif}
+
+\usepackage{amsmath, latexsym, color, graphicx, amssymb, here}
+\usepackage{epsf, epsfig, pifont,tikz}
+\usepackage{graphics, calrsfs}
+\usepackage{tangocolors}
+\usepackage{times}
+\usepackage{fancybox,calc}
+\usepackage{hyperref}
+\usepackage{pgfplots}
+\usepackage{verbatim}
+
+\newcommand{\parD}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\parDD}[2]{\frac{\partial^2 #1}{\partial #2 ^2}}
+\newcommand{\laplacian}{\Delta}
+\renewcommand{\div}{\nabla\cdot}
+\newcommand{\grad}{\nabla}
+\newcommand{\divp}{\nabla^\prime\cdot}
+\newcommand{\gradp}{\nabla^\prime}
+\newcommand{\curl}{\nabla\times}
+\newcommand{\cross}{\times}
+\renewcommand{\dot}{\cdot}
+% define some colors
+\definecolor{cBlue}{rgb}{.255,.41,.884} % RoyalBlue of svgnames
+\definecolor{cRed}{rgb}{1, 0, 0} % Red of svgnames
+
+
+
+%\usecolortheme[named=blue]{structure}
+
+\title{Basic Equations in \LaTeX }
+\author{{Stan Reeves}}
+\institute{Department of Electrical and Computer Engineering}
+\date{\today}
+
+\begin{document}
+
+
+\frame{\titlepage}
+%\slideCaption{\LaTeX}
+
+%------------------------------------------------------------Slide 1
+\section{Introduction}
+\frame
+{
+\frametitle{Equations in \LaTeX\ }
+Equations may be the best reason to use \LaTeX.
+
+Basic \LaTeX\ equations are extended by \AmS-\TeX\ and \AmS-\LaTeX.
+\begin{itemize}
+\item \AmS\ stands for the American Mathematical Society
+\item can be used by including the \texttt{amsmath} package
+\item \AmS-\LaTeX\ will be covered in a separate presentation
+\end{itemize}
+
+Two types of equations:
+\begin{itemize}
+    \item inline
+    \item displayed
+\end{itemize}
+
+}
+
+
+\begin{frame}[fragile]
+\frametitle{Inline Equations}
+\begin{verbatim}
+The goal is to recover an estimate 
+$\hat{x}$ of $x$ given only $y$ and $A$.
+\end{verbatim}
+
+The goal is to recover an estimate 
+$\hat{x}$ of $x$ given only $y$ and $A$.
+
+\begin{block}{Comparison to PowerPoint}
+PPT is a massive pain!
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Displayed Equations}
+\begin{verbatim}
+\begin{equation}\|y - Ax\|^{2} 
+   + \alpha \|Lx\|^{2}
+\label{eq:reg}
+\end{equation}
+The minimizer of (\ref{eq:reg}) is given 
+by \ldots
+\end{verbatim}
+
+\begin{equation}\|y - Ax\|^{2} 
+   + \alpha \|Lx\|^{2}
+\label{eq:reg}
+\end{equation}
+The minimizer of (\ref{eq:reg}) is given 
+by \ldots
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Equation Numbering and Referencing}
+\begin{itemize}
+	\item The equation environment automatically numbers equations.
+	\item Equations may be referenced if they are labeled as \verb=\label{name}=
+	\item The reference can be anywhere in the body, with the form \verb=\ref{name}=
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Suppressing Equation Numbering}
+Sometimes we may want to display an equation without numbering:
+\begin{verbatim}
+\begin{equation*}
+\|y - Ax\|^{2} + \alpha \|Lx\|^{2}
+\label{eq:reg}
+\end{equation*}
+\end{verbatim}
+or
+\begin{verbatim}
+\[ \|y - Ax\|^{2} + \alpha \|Lx\|^{2} \]
+\end{verbatim}
+\[ \|y - Ax\|^{2} + \alpha \|Lx\|^{2} \]
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Multi-line Equation Derivations}
+\begin{verbatim}
+\begin{eqnarray}
+\hat{x}_{\alpha} & = &  
+BA^Ty + Ba_a^T[I - a_aBa_a^T]^{-1}a_aBA^Ty
+   \nonumber \\
+& = &  BA^Ty + Ba_a^Tw \nonumber \\
+& = &  BA_c^TP^T \left[\begin{array}{r} y \\ 
+                    w \end{array}\right]
+\label{eq:solsplit}
+\end{eqnarray}
+\end{verbatim}
+\begin{eqnarray}
+\hat{x}_{\alpha} & = &  
+BA^Ty + Ba_a^T[I - a_aBa_a^T]^{-1}a_aBA^Ty
+   \nonumber \\
+& = &  BA^Ty + Ba_a^Tw \nonumber \\
+& = &  BA_c^TP^T
+   \left[\begin{array}{r} y \\ w \end{array}\right]
+\label{eq:solsplit}
+\end{eqnarray}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Multi-line Equation Derivations}
+Things to note:
+\begin{itemize}
+  \item \verb+& = &+ lines up the equal signs
+  \item \verb=\\= ends each line
+	\item must use \verb=\nonumber= on each line where numbering is to be suppressed
+	\item \verb=eqnarray*= form suppresses all numbering
+\end{itemize}
+Arrays are probably best covered in \AmS-\LaTeX.
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Fractions and Delimiters}
+\begin{verbatim}
+\[ \frac{1 + x}{3+x^2} \]
+\end{verbatim}
+\[ \frac{1 + x}{3+x^2} \]
+\begin{verbatim}
+\[ \left(\frac{1 + x}{3+x^2}\right)^2 \]
+\end{verbatim}
+\[ \left(\frac{1 + x}{3+x^2}\right)^2 \]
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Symbols}
+\begin{itemize}
+	\item Symbol guide (linked from web site) contains 178 pages of \LaTeX\ symbols!
+	\item Use drop-down menu for symbols, but you'll memorize the common ones.
+\end{itemize}
+\begin{verbatim}
+\[ \int \cos x\,dx = \sin x + C \]
+\end{verbatim}
+
+\[ \int \cos x\,dx = \sin x + C \]
+oops:  \verb=cos x= renders $cos x$
+\end{frame}
+
+
+
+\end{document}

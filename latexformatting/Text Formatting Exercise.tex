@@ -1,0 +1,89 @@
+\documentclass{beamer}
+
+%\usepackage{beamerthemeAUTheme}
+%\usepackage{beamerthemesplit}
+\usetheme[hideothersubsections]{AUTheme}
+%\useoutertheme{Boadilla}
+%\usetheme{Madrid}
+\usefonttheme[onlymath]{serif}
+
+\usepackage{amsmath, latexsym, color, graphicx, amssymb, here}
+\usepackage{epsf, epsfig, pifont,tikz,subfigure}
+\usepackage{graphics, calrsfs}
+\usepackage{times}
+\usepackage{fancybox,calc}
+
+\newcommand{\parD}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\parDD}[2]{\frac{\partial^2 #1}{\partial #2 ^2}}
+\newcommand{\laplacian}{\Delta}
+\renewcommand{\div}{\nabla\cdot}
+\newcommand{\grad}{\nabla}
+\newcommand{\divp}{\nabla^\prime\cdot}
+\newcommand{\gradp}{\nabla^\prime}
+\newcommand{\curl}{\nabla\times}
+\newcommand{\cross}{\times}
+\renewcommand{\dot}{\cdot}
+% define some colors
+\definecolor{cBlue}{rgb}{.255,.41,.884} % RoyalBlue of svgnames
+\definecolor{cRed}{rgb}{1, 0, 0} % Red of svgnames
+
+
+
+%\usecolortheme[named=blue]{structure}
+
+\title{ \LaTeX\ Exercise: Text Formatting}
+\author{Wenting Deng}
+\institute{Department of Electrical Engineering}
+\date{June 30th 2010}
+
+\begin{document}
+
+%\institution{Department of Electrical and Computer
+%Engineering \\  Auburn Chapter of SIAM  \\
+%Auburn University}
+
+
+\frame{\titlepage}
+%\slideCaption{\LaTeX}
+
+%------------------------------------------------------------Slide 1
+
+\frame {
+Display the following sentences in \LaTeX\ output file, and space between two adjacent lines is 15pt.\\[7pt]
+
+``\,`One' or `Two'\,''\ he asked \\[15pt]
+``No, it is 1--2''\\[15pt]
+It is easy to put \$ \% \~{} $\backslash$ in the text
+
+}
+
+%------------------------------------------------------------Slide 2
+\frame {
+
+Repeat the sentence `` \LaTeX\ is useful ''in a enumerate list. Each statement has different type style. 
+\\ \ \\
+\emph{Note:  It may not be possible to get every combination with the default font.}
+\begin{enumerate}
+\item In bold \& small caps style
+\item In italic \& huge style
+\item In tiny \& roman stye
+\end{enumerate}
+
+}
+
+%------------------------------------------------------------Slide 3
+
+\frame {
+Display the sentence ``\LaTeX\ is not very easy'' at different locations as following
+
+\centerline {\LaTeX\ is not very easy (center)}
+
+\hspace*{0.5in} \LaTeX\ is not very easy (0.5-inch from left)\\
+
+\vspace*{1.5in} \LaTeX\ is not very easy (1.5-inch from above)
+
+}
+%%--------------------------------------------------------------------------Slide 4
+
+
+\end{document}

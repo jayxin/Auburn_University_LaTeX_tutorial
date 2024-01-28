@@ -1,0 +1,25 @@
+\frametitle{3D plots}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{Plot}
+\begin{figure}[h!]
+^^I\centering
+^^I\includegraphics[width=4cm]{surf.png}
+\end{figure}
+\end{block}
+\column{0.4\textwidth}
+\begin{block}{Code}
+\tiny{
+\begin{verbatim}
+\begin{tikzpicture}
+^^I\begin{axis}
+\end{verbatim}
+^^I^^I\textbackslash {\color{blue}addplot3[surf,domain=0:360,samples=40]}
+\begin{verbatim}
+^^I^^I{sin(x)*sin(y)};
+^^I\end{axis}
+^^I\end{tikzpicture}
+\end{verbatim}
+}
+\end{block}
+\end{columns}

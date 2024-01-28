@@ -1,0 +1,505 @@
+\documentclass[article]{beamer}
+\usetheme{Warsaw}
+\setbeamertemplate{footline}[frame number]
+
+
+\usefonttheme[]{serif}
+\usepackage{amsmath, latexsym, color, graphicx, amssymb, bm, here}
+\usepackage{epsf, epsfig, pifont,tikz,subfigure}
+\usepackage{graphics, calrsfs}
+\usepackage{times}
+\usepackage{fancybox,calc}
+\usepackage{palatino,mathpazo}
+\usepackage{amsfonts}
+\usepackage{sidecap}
+\usepackage{multirow}
+
+
+\title{Presentation using \LaTeX{} Beamer}
+\author{Dongjin Kim}
+\institute{Computer Science and Software Engineering \\ Auburn University}
+\date{\scriptsize{\today}}
+
+
+\AtBeginSection[]
+{
+  \begin{frame}{Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%Frame 1 : Title page%%%%%%%%%%%%%%%%%%
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%Frame 2 : Contents%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Contents}
+\tableofcontents
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%Frame 3 : Table : Step1%%%%%%%%%%%%%
+\section{Table}
+\subsection{Step1: Create a basic table with text-align}
+
+\begin{frame}[fragile]
+\frametitle{Step 1 : Create a basic table with text-align}
+
+\begin{columns}
+\column{.4\textwidth}
+\tiny{
+	\begin{tabular}{ l l l c r }
+	  \text left & left & left & centered & right \\
+	 	left & left & left & centered & right \\
+ 	  left & left & left & centered & right \\
+	\end{tabular}	
+}	
+\column{.5\textwidth}
+\tiny{
+	\begin{verbatim}
+\begin{tabular}{ l l l c r }
+  left & left & left & centered & right \\
+ 	left & left & left & centered & right \\
+  left & left & left & centered & right \\
+\end{tabular}
+	\end{verbatim}
+} 	
+\end{columns}
+
+\begin{columns}
+\column{.4\textwidth}
+\tiny{
+	\begin{tabular}{ l*{3} c r }
+	  \text left & left & left & centered & right \\
+	 	left & left & left & centered & right \\
+ 	  left & left & left & centered & right \\
+	\end{tabular}	
+}	
+\column{.5\textwidth}
+\tiny{
+	\begin{verbatim}
+\begin{tabular}{ l*{3} c r }
+  left & left & left & centered & right \\
+ 	left & left & left & centered & right \\
+  left & left & left & centered & right \\
+\end{tabular}
+	\end{verbatim}
+} 	
+\end{columns}
+
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%Frame 4 : Table : Step2%%%%%%%%%%%%%
+\subsection{Step2: Draw lines}
+
+\begin{frame}[fragile]
+\frametitle{Step 2 : Draw lines }
+
+\begin{columns}
+\column{.1\textwidth}
+\tiny{
+  \begin{tabular}{ l | c || r | }
+    \hline
+    1 & 2 & 3 \\ 
+    \hline
+    4 & 5 & 6 \\ 
+    7 & 8 & 9 \\
+    \hline
+  \end{tabular}
+}	
+\column{.5\textwidth}
+
+\tiny{
+	\begin{verbatim}
+\begin{tabular}{ l | c || r | }
+  \hline
+  1 & 2 & 3 \\ 
+  \hline
+  4 & 5 & 6 \\ 
+  7 & 8 & 9 \\
+  \hline
+\end{tabular}
+  \end{verbatim}
+}
+\end{columns}
+
+\begin{columns}
+\column{.1\textwidth}
+\tiny{
+  \begin{tabular}{ l | c || r | }
+    \hline
+    1 & 2 & 3 \\ 
+    \cline{1-2}
+    4 & 5 & 6 \\ 
+    7 & 8 & 9 \\
+    \cline{1-1}
+  \end{tabular}
+}	
+\column{.5\textwidth}
+
+\tiny{
+	\begin{verbatim}
+\begin{tabular}{ l | c || r | }
+  \hline
+  1 & 2 & 3 \\ 
+  \cline{1-2}
+  4 & 5 & 6 \\ 
+  7 & 8 & 9 \\
+  \cline{1-1}
+\end{tabular}
+\end{verbatim}
+}
+\end{columns}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%Frame 4 : Table : Step3%%%%%%%%%%%%%
+\subsection{Step3: Wrap text}
+
+\begin{frame}[fragile]
+\frametitle{Step 3 : Wrap text }
+
+  \begin{tabular}{| l | c || r | }
+    \hline
+    1 & 2 & This line should be wrapped, blah blah blah blah blah blah blah blah blah blah blah blah \\ 
+    \hline
+    4 & 5 & 6 \\ 
+    \hline
+    7 & 8 & 9 \\
+    \hline
+  \end{tabular}
+
+
+\begin{columns}
+\column{.3\textwidth}
+\tiny{
+  \begin{tabular}{| l | c || p{3cm} | }
+    \hline
+    1 & 2 & This line should be wrapped, blah blah blah blah blah blah blah blah blah blah blah blah \\ 
+    \hline
+    4 & 5 & 6 \\ 
+    \hline
+    7 & 8 & 9 \\
+    \hline
+  \end{tabular}
+ }	
+\column{.5\textwidth}
+
+\tiny{
+	\begin{verbatim}	
+
+\begin{tabular}{| l | c || p{5cm} | }  
+%%%p{width} paragraph column with 
+%%%text vertically aligned at the top
+%%%m : middle, b : bottom
+  \hline
+  1 & 2 & This line should be wrapped, 
+  blah blah blah blah blah blah blah
+  blah blah blah blah blah \\ 
+  \hline
+  4 & 5 & 6 \\ 
+  \hline
+  7 & 8 & 9 \\
+  \hline
+\end{tabular}
+  \end{verbatim}
+}
+\end{columns}
+
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%Frame 5 : Table : Step4%%%%%%%%%%%%%
+\subsection{Step 4: Span multiple columns and rows}
+
+\begin{frame}[fragile]
+\frametitle{Step 4 : Span multiple columns and rows }
+
+\begin{columns}
+\column{.3\textwidth}
+  \begin{tabular}{| l | c || r | }
+    \hline
+    \multicolumn{3}{|c|}{Spanned columns} \\
+    \hline
+    1 & 2 & 3 \\ 
+    \hline
+    4 & 5 & 6 \\
+    \hline 
+    7 & 8 & 9 \\
+    \hline
+  \end{tabular}
+	
+\column{.5\textwidth}
+\tiny{
+	\begin{verbatim}
+\begin{tabular}{| l | c || r | }
+  \hline
+  \multicolumn{3}{|c|}{Spanned columns} \\
+  \hline
+  1 & 2 & 3 \\ 
+  \hline
+  4 & 5 & 6 \\
+  \hline 
+  7 & 8 & 9 \\
+  \hline
+\end{tabular}
+  \end{verbatim}
+}
+\end{columns}
+
+\begin{columns}
+\column{.3\textwidth}
+  \begin{tabular}{| l | c || r | }
+    \hline
+    \multirow{2}{*}{Spanned rows} & 2 & 3\\    
+    \cline{2-3}
+                                  & 5 & 6 \\
+    \hline 
+    7 & 8 & 9 \\
+    \hline
+  \end{tabular}
+	
+\column{.5\textwidth}
+\tiny{
+	\begin{verbatim}
+\usepackage{multirow}
+	
+\begin{tabular}{| l | c || r | }
+  \hline
+  \multirow{2}{*}{Spanned rows} & 2 & 3\\  
+%%%\multirow{num_rows}{width}{contents}
+%%%'*' in witdh means using natural width    
+  \cline{2-3}
+                                & 5 & 6 \\
+  \hline 
+  7 & 8 & 9 \\
+  \hline
+\end{tabular}
+	\end{verbatim}
+}
+\end{columns}
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%Frame 6 : Table : Step5%%%%%%%%%%%%%
+\subsection{Step 4: Resize a table}
+
+\begin{frame}[fragile]
+\frametitle{Step 4 : Resize a table }
+
+\begin{columns}
+\column{.3\textwidth}
+  \begin{tabular}{| l | c | r | }
+    \hline
+    \multicolumn{3}{|c|}{Spanned columns} \\
+    \hline
+    1 & 2 & 3 \\ 
+    \hline
+    4 & 5 & 6 \\
+    \hline 
+    7 & 8 & 9 \\
+    \hline
+  \end{tabular}
+	
+\column{.5\textwidth}
+\tiny{
+	\begin{verbatim}
+\begin{tabular}{| l | c | r | }
+  \hline
+  \multicolumn{3}{|c|}{Spanned columns} \\
+  \hline
+  1 & 2 & 3 \\ 
+  \hline
+  4 & 5 & 6 \\
+  \hline 
+  7 & 8 & 9 \\
+  \hline
+\end{tabular}
+  \end{verbatim}
+}
+\end{columns}
+
+\begin{columns}
+\column{.3\textwidth}
+\resizebox{4cm}{1cm}{
+  \begin{tabular}{| l | c | r | }
+    \hline
+    \multicolumn{3}{|c|}{Spanned columns} \\
+    \hline
+    1 & 2 & 3 \\ 
+    \hline
+    4 & 5 & 6 \\
+    \hline 
+    7 & 8 & 9 \\
+    \hline
+  \end{tabular}
+}
+	
+\column{.5\textwidth}
+\tiny{
+	\begin{verbatim}
+\resizebox{4cm}{2cm}{
+\begin{tabular}{| l | c | r | }
+  \hline
+  \multicolumn{3}{|c|}{Spanned columns} \\
+  \hline
+  1 & 2 & 3 \\ 
+  \hline
+  4 & 5 & 6 \\
+  \hline 
+  7 & 8 & 9 \\
+  \hline
+\end{tabular}
+}
+  \end{verbatim}
+}
+\end{columns}
+
+
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%Frame 7 : Table : Step5%%%%%%%%%%%%%
+\subsection{Step 5: Put a caption}
+
+\begin{frame}[fragile]
+\frametitle{Step 5 : Put a caption }
+
+\begin{columns}
+\column{.5\textwidth}	
+
+\begin{table}
+\caption{Sample caption}
+  \begin{tabular}{| l | c | r | }  
+    \hline
+    \multicolumn{3}{|c|}{Paint alternately} \\
+    \hline
+    1 & 2 & 3 \\ 
+    \hline
+    4 & 5 & 6 \\
+    \hline 
+    7 & 8 & 9 \\
+    \hline
+  \end{tabular}
+
+\end{table}
+
+	
+\column{.5\textwidth}
+\tiny{
+	\begin{verbatim}
+\begin{table}
+\caption{sample caption}
+  \begin{tabular}{| l | c | r | }  
+    \hline
+    \multicolumn{3}{|c|}{Paint alternately} \\
+    \hline
+    1 & 2 & 3 \\ 
+    \hline
+    4 & 5 & 6 \\
+    \hline 
+    7 & 8 & 9 \\
+    \hline
+  \end{tabular}
+
+\end{table}
+	\end{verbatim}
+}
+\end{columns}
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%Frame 8 : Figure : Step1%%%%%%%%%%%%%
+\section{Figure}
+\subsection{Step1: Insert a simple figure}
+
+\begin{frame}[fragile]
+\frametitle{Step 1 : Insert a simple figure}
+
+\begin{columns}
+\column{.4\textwidth}
+\tiny{
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=4cm]{image1.png}
+	\end{figure}
+}	
+\column{.5\textwidth}
+\tiny{
+	\begin{verbatim}
+\begin{figure}[h!]
+%%% h:place here
+%%% t:place at the top
+%%% b:place at the bottom
+	\centering
+	\includegraphics[width=4cm]{image1.png}
+\end{figure}
+\end{verbatim}
+} 	
+\end{columns}
+
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%Frame 9 : Figure : Step2%%%%%%%%%%%%%
+\subsection{Step2: Put a caption }
+
+\begin{frame}[fragile]
+\frametitle{Step 2 : Put a caption}
+
+\begin{columns}
+\column{.4\textwidth}
+\tiny{
+	\begin{figure}[h!]
+	\centering
+	\caption{Top Caption}
+	\includegraphics[width=4cm]{image1.png}
+	\caption{Bottom Caption}
+	\end{figure}
+}	
+\column{.5\textwidth}
+\tiny{
+	\begin{verbatim}
+\begin{figure}[h!]
+	\centering
+	\caption{Top Caption}
+	\includegraphics[width=4cm]{image1.png}
+	\caption{Bottom Caption}
+\end{figure}
+	\end{verbatim}
+} 	
+\end{columns}
+
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Q and A}
+\begin{frame}[fragile]
+\frametitle{Q and A}
+\huge{
+Any Questions?
+}
+\end{frame}
+\end{document}

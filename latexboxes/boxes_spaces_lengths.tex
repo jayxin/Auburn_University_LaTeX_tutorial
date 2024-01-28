@@ -1,0 +1,522 @@
+%% Beamer Presentation: Boxes/Spaces/Lengths 
+%% Author: Michael Pukish
+%% Date: 07/07/2010
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------
+%
+\documentclass[10pt]{beamer}
+\usetheme{Warsaw}
+\usecolortheme{orchid}
+\setbeamertemplate{footline}[frame number]
+
+%\usefonttheme[]{serif}
+\usepackage{amsmath,latexsym,color,graphicx}
+\usepackage{epsf,epsfig,subfigure}
+\usepackage{amsfonts,multicol}
+
+\newcommand{\tbs}{\textbackslash}
+\definecolor{cRed}{rgb}{1,0,0}
+
+%----------------------------------------------------------
+\title{Specifying Spaces, Lengths, and Boxes in \LaTeX{}}
+\author{Michael S. Pukish}
+\institute{Electrical and Computer Engineering \\Auburn University}
+\date{\scriptsize{\today}}
+
+\AtBeginSection[]
+{\begin{frame}{Outline}
+	\tableofcontents[currentsection]
+ \end{frame}
+}
+ 
+\begin{document}
+% TITLE FRAME  ********************************************
+\maketitle
+
+% FRAME 1 ********************************************
+\section{Scope}
+%\subsection{Columns and Blocks}
+
+\begin{frame}
+\frametitle{Scope}
+%\framesubtitle{Columns and Blocks}
+	This presentation covers \LaTeX{} spaces, lengths, and boxes as these elements apply to inline text structure of documents.  These concepts apply to many areas of \LaTeX{}.  For clarification, this presentation will not cover the application of spaces, lengths, and boxes as they apply to:
+
+\begin{itemize}
+	\item equations
+	\item graphics
+	\item figures
+	\item etc.
+\end{itemize}  
+\end{frame}
+
+% FRAME 2 ********************************************
+\section{Horizontal Spacing Control}
+\subsection{hspace\{\} and hspace*\{\}}
+
+\begin{frame}[fragile]
+\frametitle{Horizontal Spacing Control}
+\framesubtitle{hspace\{\} and hspace*\{\}}
+
+The standard \ttfamily \verb|\hspace{length}| \rmfamily command will simply trigger a newline if it runs out of space:
+	\begin{columns}
+		\column{.4\textwidth}
+			\begin{block}{}
+				\hspace{.125in} One \hspace{.125in} Two \hspace{.125in} Three \hspace{.45in} Four
+			\end{block}
+		\column{.4\textwidth}
+			\begin{block}{}
+				\footnotesize{\begin{verbatim}
+					\hspace{.125in} One 
+					\hspace{.125in} Two 
+					\hspace{.125in} Three 
+					\hspace{.45in} Four
+				\end{verbatim}}
+			\end{block}
+	\end{columns}
+	
+But \ttfamily \verb|\hspace*{length}| \rmfamily will enforce the specified space (within a paragraph):
+	\begin{columns}
+		\column{.4\textwidth}
+			\begin{block}{}
+				\hspace*{.125in} One \hspace*{.125in} Two \hspace*{.125in} Three \hspace*{.45in} Four
+			\end{block}
+		\column{.4\textwidth}
+			\begin{block}{}
+				\footnotesize{\begin{verbatim}
+					\hspace*{.125in} One 
+					\hspace*{.125in} Two 
+					\hspace*{.125in} Three 
+					\hspace*{.45in} Four
+				\end{verbatim}}
+			\end{block}
+	\end{columns}
+	
+\emph{Note:} \ttfamily \verb|\hspace{}| and \verb|\hspace*{}| \rmfamily are equivalent at locations other than at the end of a line.
+
+\end{frame}
+
+% FRAME 3 ********************************************
+%\section{Horizontal Spacing Control}
+\subsection{Font Size and hspace\{\}}
+
+\begin{frame}[fragile]
+\frametitle{Horizontal Spacing Control}
+\framesubtitle{Font Size and hspace\{\}}
+
+When using horizontal space together with text, it may make sense to
+make the space adjust its size relative to the size of the current font. This
+can be done by using the text-relative units em and ex:
+	\begin{columns}
+		\column{.4\textwidth}
+			\begin{block}{}
+				{\Large{}big\hspace{1em}y} \\
+				{\tiny{}tin\hspace{1em}y}
+			\end{block}
+		\column{.4\textwidth}
+			\begin{block}{}
+				\footnotesize{\begin{verbatim}
+					{\Large{}big\hspace{1em}y} \\
+					{\tiny{}tin\hspace{1em}y}
+				\end{verbatim}}
+			\end{block}
+	\end{columns}
+
+\end{frame}
+
+% FRAME 4 ********************************************
+%\section{Horizontal Spacing Control}
+\subsection{hspace\{\} and stretch\{\}, hfill}
+
+\begin{frame}[fragile]
+\frametitle{Horizontal Spacing Control}
+\framesubtitle{hspace\{\} and stretch\{\}, hfill}
+
+The command \ttfamily \verb|\stretch{length}| \rmfamily , used in conjunction with the \ttfamily \verb|\hspace{}| \rmfamily command, generates a special ``rubber space'' in which all the remaining space on a line is filled up:
+	\begin{columns}
+		\column{.4\textwidth}
+			\begin{block}{}
+				x \hspace{\stretch{1}} x
+			\end{block}
+		\column{.4\textwidth}
+			\begin{block}{}
+				\footnotesize{\begin{verbatim}
+					x \hspace{\stretch{1}} x
+				\end{verbatim}}
+			\end{block}
+	\end{columns}
+	
+The numeral argument does not have significance unless a succession of \ttfamily \verb|\hspace{\stretch{}}| \rmfamily commands are issued on the same line.  In this case, the numerals represent respective proportions of all \ttfamily \verb|\stretch{}| \rmfamily commands issued on the same line:
+	\begin{columns}
+		\column{.4\textwidth}
+			\begin{block}{}
+				a \hspace{\stretch{1}} b \hspace{\stretch{3}} c
+			\end{block}
+		\column{.4\textwidth}
+			\begin{block}{}
+				\footnotesize{\begin{verbatim}
+					a \hspace{\stretch{1}} b 
+					\hspace{\stretch{3}} c
+				\end{verbatim}}
+			\end{block}
+	\end{columns}
+	
+If only an evenly proportional spacing is needed between elements on a line, use the \ttfamily \verb|\hfill| \rmfamily command such as:
+	\begin{columns}
+		\column{.4\textwidth}
+			\begin{block}{}
+				pip \hfill pop \hfill bing \hfill plop
+			\end{block}
+		\column{.4\textwidth}
+			\begin{block}{}
+				\footnotesize{\begin{verbatim}
+					pip \hfill pop 
+					\hfill bing \hfill plop
+				\end{verbatim}}
+			\end{block}
+	\end{columns}
+	
+\end{frame}
+
+% FRAME 5 ********************************************
+\section{Vertical Spacing Control}
+\subsection{vspace\{\} and vspace*\{\}}
+
+\begin{frame}[fragile]
+\frametitle{Vertical Spacing Control}
+\framesubtitle{vspace\{\} and vspace*\{\}}
+
+Logically following from \ttfamily \verb|\hspace{} and \hspace*{}| \rmfamily ( \ldots), the commands \ttfamily \verb|\vspace{length} and \vspace*{length}| \rmfamily operate not between lines \textit{within} a paragraph, but on the vertical space \textit{between} paragraphs themselves.  These commands should normally be used between two empty lines. If the space should be preserved and spread across the bottom and top of successive pages, use the starred version of the command, \ttfamliy \verb|\vspace*{}, instead of \vspace{}| \rmfamily:
+	\begin{columns}
+		\column{.5\textwidth}
+			\begin{block}{}
+				\small{First paragraph: This produces \ldots 
+				\vspace{2ex}
+				Second Paragraph: No effect.(document only!!)
+
+				\vspace{2ex}
+
+				Third Paragraph: But now we have what we want.}
+			\end{block}
+		\column{.5\textwidth}
+			\begin{block}{}
+				\footnotesize{\begin{verbatim}
+					First paragraph: This produces 
+					\ldots \vspace{2ex}
+					Second Paragraph: No effect.
+					(document only!!)
+
+					\vspace{2ex}
+
+					Third Paragraph: But now 
+					we have what we want.
+				\end{verbatim}}
+			\end{block}
+	\end{columns}
+	
+\end{frame}
+
+% FRAME 6 ********************************************
+%\section{Vertical Spacing Control}
+\subsection{vspace\{\} and stretch\{\}, vfill}
+
+\begin{frame}[fragile]
+\frametitle{Vertical Spacing Control}
+\framesubtitle{vspace\{\} and stretch\{\}, vfill}
+
+The \ttfamily \verb|\stretch{}| \rmfamily command can be used in conjunction with the \ttfamliy \verb|\vspace*{}, and \vspace{}| \rmfamily commands such as:
+	\begin{block}{}
+		\footnotesize{\begin{verbatim}
+			Hi! \vspace{stretch{1}} something \vspace{stretch{3}} else \pagebreak
+		\end{verbatim}}
+	\end{block}
+	
+\ldots in order to define relative proportional vertical spacing on a page between structures similar to its use with the \ttfamily \verb|\hspace{}| \rmfamily commands.  Since an example would require an entire page top to bottom, one is not shown.  Use your imagination.\\[10pt]
+	
+If only an evenly proportional vertical spacing is needed between elements on a page, use the \ttfamily \verb|\vfill| \rmfamily command similarly to usage of the \ttfamily \verb|\hfill| \rmfamily command.
+		
+\end{frame}
+
+% FRAME 7 ********************************************
+%\section{Vertical Spacing Control}
+\subsection{Other vertical spacers}
+
+\begin{frame}[fragile]
+\frametitle{Vertical Spacing Control}
+\framesubtitle{Other vertical spacers}
+
+For custom spacing between lines within a paragraph, the \ttfamily \verb|`\\[length]'| \rmfamily command is the only way to go as in:
+	\begin{columns}
+		\column{.4\textwidth}
+			\begin{block}{}
+				\small{The next line is spaced 10pt below this one \\[10pt]
+				Here it is.}
+			\end{block}
+		\column{.4\textwidth}
+			\begin{block}{}
+				\footnotesize{\begin{verbatim}
+					The next line is spaced 10pt 
+					below this one \\[10pt]
+					Here it is.
+				\end{verbatim}}
+			\end{block}
+	\end{columns}
+
+\vspace{10pt}
+
+The \ttfamily \verb|\bigskip, \medskip, and \smallskip| \rmfamily commands can be used as alternative vertical line spacers within a paragraph if an exact spacing is not required.
+	
+\end{frame}
+
+% FRAME 8 ********************************************
+\section{Boxes}
+\subsection{What are Boxes ?}
+
+\begin{frame}[fragile]
+\frametitle{Boxes}
+\framesubtitle{What are Boxes ?}
+
+The underlying structure of \LaTeX{} basically typsets all letters, words, sentences, paragraphs, figures, tables, etc., into ``boxes''. Multiple of these elements on a page are then further grouped into enclosing ``boxes''.  We can manipulate and emphasize these boxes in various ways.
+	
+\end{frame}
+
+% FRAME 9 ********************************************
+%\section{Boxes}
+\subsection{parbox\{\} and minipage}
+
+\begin{frame}[fragile]
+\frametitle{Boxes}
+\framesubtitle{parbox\{\} and minipage}
+
+The \footnotesize{\ttfamily \verb|\parbox[pos]{width}{text} and \begin{minipage}[pos]{width}text \end{minipage}|} \rmfamily commands can place a paragraph within a box.  The `minipage' method is more powerful as far as what you can do within a box.  You can explore that on your own.
+
+\vspace{10pt}
+
+As an example:
+	\begin{columns}
+		\column{.4\textwidth}
+			\begin{block}{}
+				\small{\parbox[c]{\textwidth}{
+					Here is a basic box around a paragraph.  We have set a reasonable width relative to textwidth, 							and the text is centered vertically.  Note that the `pos' variable can be either `t', `b', or `c' 					to designate vertical alignment.
+					}}
+			\end{block}
+		\column{.4\textwidth}
+			\begin{block}{}
+				\footnotesize{\begin{verbatim}
+					\parbox[c]{\textwidth}{
+						Here is a basic box around a 
+						paragraph.  We have set a 
+						reasonable width relative to 
+						textwidth, and the text is 
+						centered vertically.  Note 
+						that the `pos' variable can 
+						be either `t', `b', or `c' to 
+						designate vertical alignment.}
+				\end{verbatim}}
+			\end{block}
+	\end{columns}
+	
+\end{frame}
+
+% FRAME 10 ********************************************
+%\section{Boxes}
+\subsection{makebox\{\} and mbox}
+
+\begin{frame}[fragile]
+\frametitle{Boxes}
+\framesubtitle{makebox\{\} and mbox}
+
+The \ttfamily \verb|\makebox[width][pos]{text}| \rmfamily command is meant to operate on a single line with added horizontal control:
+	\begin{columns}
+		\column{.4\textwidth}
+			\begin{block}{}
+				\makebox[\textwidth][s] {
+					A simple example.	
+				}
+			\end{block}
+		\column{.4\textwidth}
+			\begin{block}{}
+				\footnotesize{\begin{verbatim}
+					\makebox[\textwidth][s] {
+						A simple example.	
+					}
+				\end{verbatim}}
+			\end{block}
+	\end{columns}
+	
+\vspace{10pt}
+
+Width is optional and specified as before, but `pos' is either 'l', 'r', or 's' for horizontal flushleft, flushright, or spread, respectively.
+
+\vspace{10pt}
+	
+The \ttfamily \verb|\mbox{text}| \rmfamily command simply defines a box which will automatically set to the width of the specified text without additional options.
+	
+\end{frame}
+
+% FRAME 11 ********************************************
+%\section{Boxes}
+\subsection{framebox\{\} and fbox}
+
+\begin{frame}[fragile]
+\frametitle{Boxes}
+\framesubtitle{framebox\{\} and fbox}
+
+The \ttfamily \verb|\framebox[width][pos]{text}| \rmfamily command is exactly the same as the \ttfamily \verb|\makebox| \rmfamily command, except that it puts a frame around the outside of the box that it creates:
+	\begin{columns}
+		\column{.4\textwidth}
+			\begin{block}{}
+				\framebox[\textwidth][s] {
+					A simple example.	
+				}	
+			\end{block}
+		\column{.4\textwidth}
+			\begin{block}{}
+				\footnotesize{\begin{verbatim}
+					\framebox[\textwidth][s] {
+						A simple example.	
+					}	
+				\end{verbatim}}
+			\end{block}
+	\end{columns}
+	
+\vspace{10pt}
+
+The \ttfamily \verb|\fbox{text}| \rmfamily command is exactly the same as the \ttfamily \verb|\mbox{text}| \rmfamily command, except that it puts a frame around the outside of the box that it creates.
+
+\end{frame}
+
+% FRAME 12 ********************************************
+%\section{Boxes}
+\subsection{Example so far}
+
+\begin{frame}[fragile]
+\frametitle{Boxes}
+\framesubtitle{Example so far}
+
+An example combining the box structures explored so far is adapted from the ``Not So Short \ldots'' document by Oetiker:
+	\begin{columns}
+		\column{.4\textwidth}
+			\begin{block}{}
+			\footnotesize{
+				\makebox[.6\textwidth]{
+					c e n t r a l}\par
+				\makebox[.6\textwidth][s]{
+					s p r e a d}\par
+				\framebox[1.1\width]{Guess I’m
+					framed now!} \par
+				\framebox[0.8\width][r]{Bummer,
+					I am too wide} \par
+				\framebox[1cm][l]{never
+					mind, so am I}
+				Can you read this?}	
+			\end{block}
+		\column{.4\textwidth}
+			\begin{block}{}
+				\footnotesize{\begin{verbatim}
+					\makebox[.6\textwidth]{
+						c e n t r a l}\par
+					\makebox[.6\textwidth][s]{
+						s p r e a d}\par
+					\framebox[1.1\width]{Guess I’m
+						framed now!} \par
+					\framebox[0.8\width][r]{Bummer,
+						I am too wide} \par
+					\framebox[1cm][l]{never
+						mind, so am I}
+					Can you read this?}
+				\end{verbatim}}
+			\end{block}
+	\end{columns}
+
+\end{frame}
+
+% FRAME 13 ********************************************
+%\section{Boxes}
+\subsection{raisebox\{\}}
+
+\begin{frame}[fragile]
+\frametitle{Boxes}
+\framesubtitle{raisebox\{\}}
+
+The \footnotesize{\ttfamily \verb|\raisebox{lift}[extend-above-baseline][extend-below-baseline]{text}|} \rmfamily command gives strange and wonderful vertical control to properties of a box.  'lift' is the distance the specified text will raise from the baseline of the current line. The other two optional parameters control the line spacing to other text above and below the current raisebox item.
+
+\vspace{10pt}
+
+An example is adapted from the ``Not So Short \ldots'' document by Oetiker:
+	\begin{columns}
+		\column{.5\textwidth}
+			\begin{block}{}
+			\frame {
+				\parbox[c]{\textwidth} {
+					\raisebox{-5pt}[0pt][0pt]{\Large
+						\textbf{Aaaa\raisebox{-0.3ex}{a}
+					\raisebox{-0.7ex}{aa}
+					\raisebox{-1.2ex}{r}
+					\raisebox{-2.2ex}{g}
+					\raisebox{-4.5ex}{h}}}
+				she shouted, but not even the next
+				one in line noticed that something
+				terrible had happened to her.
+				}
+			}	
+			\end{block}
+		\column{.5\textwidth}
+			\begin{block}{}
+				\footnotesize{\begin{verbatim}
+					\frame {
+						\parbox[c]{\textwidth} {
+							\raisebox{-5pt}[0pt][0pt]{\Large
+								\textbf{Aaaa\raisebox{-0.3ex}{a}
+							\raisebox{-0.7ex}{aa}
+							\raisebox{-1.2ex}{r}
+							\raisebox{-2.2ex}{g}
+							\raisebox{-4.5ex}{h}}}
+						she shouted, but not even the next
+						one in line noticed that something
+						terrible had happened to her. }}	
+				\end{verbatim}}
+			\end{block}
+	\end{columns}
+
+\end{frame}
+
+% FRAME 14 ********************************************
+\section{Further Study On Your Own}
+
+\begin{frame}[fragile]
+\frametitle{Further Study On Your Own}
+
+There are several other \LaTeX{} spacing, length, and boxing commands which have not been covered in this presentation.  Have at it:
+
+\vspace{10pt}
+
+\small{
+	\begin{itemize}
+		\item \verb|\addvspace{length}| -- extend the vertical space until it reaches length
+		\item \verb|\hrulefill, \dotfill| -- fill out all available horizontal space with a line or with dots
+		\item \verb|\rule{width}{thickness}| -- draw a line
+		\item \verb|\newsavebox{boxname}| -- define the variable boxname to store a box
+		\item \verb|\savebox{boxname}{text}, \sbox{boxname}{text}| --  save text into the variable boxname
+		\item \verb|\usebox{boxname}| -- use material stored in box variable boxname
+	\end{itemize}
+}
+
+\end{frame}
+
+% FRAME 15 ********************************************
+\section{Conclusion}
+
+\begin{frame}[fragile]
+\frametitle{Conclusion}
+
+\begin{center}
+	\Huge{\textbf{Questions ??}}
+\end{center}
+
+\end{frame}
+
+% &%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%
+% &%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%
+\end{document}

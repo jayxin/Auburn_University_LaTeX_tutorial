@@ -1,0 +1,256 @@
+\documentclass{beamer}
+
+%\usepackage{beamerthemeAUTheme}
+%\usepackage{beamerthemesplit}
+\usetheme[hideothersubsections]{AUTheme}
+%\useoutertheme{Boadilla}
+%\usetheme{Madrid}
+\usefonttheme[onlymath]{serif}
+
+\usepackage{amsmath, latexsym, color, graphicx, amssymb, here}
+\usepackage{epsf, epsfig, pifont,tikz,subfigure}
+\usepackage{graphics, calrsfs}
+\usepackage{times}
+\usepackage{fancybox,calc}
+
+\newcommand{\parD}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\parDD}[2]{\frac{\partial^2 #1}{\partial #2 ^2}}
+\newcommand{\laplacian}{\Delta}
+\renewcommand{\div}{\nabla\cdot}
+\newcommand{\grad}{\nabla}
+\newcommand{\divp}{\nabla^\prime\cdot}
+\newcommand{\gradp}{\nabla^\prime}
+\newcommand{\curl}{\nabla\times}
+\newcommand{\cross}{\times}
+\renewcommand{\dot}{\cdot}
+% define some colors
+\definecolor{cBlue}{rgb}{.255,.41,.884} % RoyalBlue of svgnames
+\definecolor{cRed}{rgb}{1, 0, 0} % Red of svgnames
+
+
+
+%\usecolortheme[named=blue]{structure}
+
+\title{Basic Text Formatting with \LaTeX}
+\author{Wenting Deng}
+\institute{Department of Electrical Engineering}
+\date{June 30th 2010}
+
+\begin{document}
+
+%\institution{Department of Electrical and Computer
+%Engineering \\  Auburn Chapter of SIAM  \\
+%Auburn University}
+
+
+\frame{\titlepage}
+%\slideCaption{\LaTeX}
+
+%------------------------------------------------------------Slide 1
+
+\frame {\frametitle{Special Characters}
+
+\begin{itemize}
+
+\item Single quotation marks: left `\ and right\ ' \\
+\item Double quotation marks: two single left quotes `\ ` \ and two single right quotes \ '\ '\ or the double quote key (")\\
+\item A double quote followed by a single quote, or vice-versa: command $\backslash$,\ between two quotation marks\\[10pt]
+{\small For example}:{\scriptsize \textit { ``\,`Fi' or `fum'\,''he asked }\\}
+\end{itemize}
+}
+
+%------------------------------------------------------------Slide 2
+\frame {\frametitle{Special Characters}
+There are three kinds of dashes in typeset documents by typing one, two, or three ``-'' characters:\\[12pt]
+{\scriptsize \texttt {An intra-word dash, as in X-ray}\\}
+An intra-word dash, as in X-ray\\[7pt]
+{\scriptsize \texttt {A medium dash for number range, like 1-\ -2}\\}
+A medium dash for number range, like 1--2\\[7pt]
+{\scriptsize \texttt {A punctuation dash-\ -\ -like this}\\}
+A punctuation dash---like this\\
+}
+
+%------------------------------------------------------------Slide 3
+
+\frame {\frametitle{Special Characters}
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=5cm]{special.jpg}
+\end{figure}
+}
+%%--------------------------------------------------------------------------Slide 4
+\frame {\frametitle{Special Characters}
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=7cm]{special1.jpg}
+\end{figure}
+}
+%%--------------------------------------------------------------------------Slide 5
+
+
+
+\frame {\frametitle{Type Style}
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=7cm]{types.jpg}
+\end{figure}
+
+These commands can be combined, provided the font thus requested actually exists. \\[10pt]
+{\small For example}: \texttt{\scriptsize $\backslash$textbf\{$\backslash$textit\{This is bold italic\}\}} \\
+produces: \textbf{\textit{This is bold italic}}.
+
+~\\
+}
+
+%%--------------------------------------------------------------------------Slide 6
+\frame {\frametitle{Type Size}
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=7cm]{size.jpg}
+\end{figure}
+\begin{itemize}
+\item The actual size produced by each command depends on the initial point size selected for the document\\
+\item The size-changing commands are usually used within a group (i.e., braces) to delimit the range of their action\\
+\item To change both type size and style at the same time, commands can be used together\\
+\end{itemize}
+}
+%%--------------------------------------------------------------------------Slide 7
+
+
+
+\frame {\frametitle{Sentences and Paragraphs}
+
+
+\setbeamercolor{uppercol}{fg=white,bg=ta3orange}%
+\setbeamercolor{lowercol}{fg=black,bg=taorange}%
+\begin{itemize}
+\item \TeX\ ignores the way the input is formatted, but pay attention only to the logical concepts end of sentence and end of paragraphy.\\
+\item The command ``$\backslash$ $\backslash$'' will force a new line. \\
+\item A value inside square brackets following ``$\backslash$ $\backslash$'' will specify the amount of blank space between lines.\\
+\item The command to force a new page is \texttt{$\backslash$newpage}.\\
+\end{itemize}
+
+~\\
+}
+%------------------------------------------------------------Slide 8
+
+\frame {\frametitle{Sentences and Paragraphs}
+
+\textit{\Large Example}:
+
+\texttt{\scriptsize The ends of \ \ \ \ \ words and sentences are marked by spaces you type. \ \ \ It doesn't matter how many spaces you type; one is as good as 100.}\\
+The ends of words and sentences are marked by spaces you type. It doesn't matter how many spaces you type; one is as good as 100.\\[20pt]
+
+This Line will be 20pt away from previous sentence.
+
+}
+
+%------------------------------------------------------------Slide 9
+
+\frame {\frametitle{Preventing Line Breaks}
+\begin{itemize} 
+\item Line breaking should be prevented at certain interword spaces.\\[7pt]
+{\scriptsize \textit {For example, the expression ``Chapter 3'' looks strange if the ``Chapter'' ends one line and the``3'' begins the next.}}\\
+\item A tilde character \~{} produces an ordinary interword space at which \TeX\ will never break a line.
+\end{itemize}
+
+\texttt{\scriptsize Mr.\~{}Jones }\ \ \ Mr.~Jones\\
+\texttt{\scriptsize U.\~{}S.\~{}Grant }\ \ \ U.~S.~Grant\\
+
+
+}
+%%--------------------------------------------------------------------------Slide 10
+
+\frame {\frametitle{Horizontal and Vertical Space} 
+\begin{itemize}
+\item If you want to leave horizontal and vertical space in your text, use commands \texttt{$\backslash$hspace*} and \texttt{$\backslash$vspace*}.\\
+\item If you want to center one line, use the command \{\texttt{$\backslash$centerline}...\}\\
+\end{itemize}
+
+
+\texttt{\scriptsize \{$\backslash$centerline \ This line will be centered.\}}\\[5pt]
+\centerline{This line will be centered.}
+
+\texttt{\scriptsize $\backslash$hspace*\{1in\} This text starts from a one-inch space.}\\
+\hspace*{1in}This text starts from a one-inch space.
+
+
+}
+
+%------------------------------------------------------------Slide 11
+
+\frame { \frametitle{Lists}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=10cm]{list1.jpg}
+\end{figure}
+
+}
+%------------------------------------------------------------Slide 12
+\frame { \frametitle{Lists}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=10cm]{list2.jpg}
+\end{figure}
+
+}
+%------------------------------------------------------------Slide 13
+\frame { \frametitle{Lists}
+Example of nesting list environments
+\begin{figure}[h!]
+\centering
+\includegraphics[width=10cm]{list3.jpg}
+\end{figure}
+
+}
+
+%%-----------------------------------------------------------------------------Slide 14
+\frame { \frametitle{Verbatim Text} 
+\begin{itemize}
+\item If you use the verbatim environment, everything input between the begin and end commands are processed as if by a typewriter. All spaces and new lines are reproduced as given. Any \LaTeX\ command will be ignored and handled as plain text.\\
+\item If you use the alltt package, it's almost the same as verbatim except it still process other \LaTeX\ commands inside the begin and end commands.
+\end{itemize}
+
+}
+%%---------------------------------------------------------------------------Slide 15
+
+%%-----------------------------------------------------------------------------
+\frame {\frametitle{Verbatim Text} 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=9cm]{verba.jpg}
+\end{figure}
+}
+%%--------------------------------------------------------------------------- 16
+\frame { \frametitle{Comments}
+\begin{itemize}
+\item Special character \%, that will comment out all the rest of the line after itself
+\item An environment called \texttt{comment} will comment out everything within itself. \\
+(Require ``verbatim package'')
+\end{itemize}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=10cm]{comment.jpg}
+\end{figure}
+
+}
+
+%%--------------------------------------------------------------------------- 17
+
+\frame {
+\Huge Thank you!
+}
+%%-----------------------------------------------------------------------------
+
+
+\end{document}
